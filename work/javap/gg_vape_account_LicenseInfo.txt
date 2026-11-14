@@ -1,0 +1,48 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_LicenseInfo.class does not contain class 
+gg_vape_account_LicenseInfo
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...unt_LicenseInfo:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "LicenseInfo.java"
+public class gg.vape.account.LicenseInfo {
+  private java.lang.String username;
+
+  private java.lang.String expires;
+
+  private java.lang.String licenseType;
+
+  private boolean hasLicense;
+
+  public gg.vape.account.LicenseInfo();
+    Code:
+         0: aload_0
+         1: invokespecial #18                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public final java.lang.String getLicenseType();
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field licenseType:Ljava/lang/String;
+         4: areturn
+
+  public final java.lang.String getUsername();
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field username:Ljava/lang/String;
+         4: areturn
+
+  public final boolean hasLicense();
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field hasLicense:Z
+         4: ireturn
+
+  public final java.lang.String getExpires();
+    Code:
+         0: aload_0
+         1: getfield      #33                 // Field expires:Ljava/lang/String;
+         4: areturn
+}

@@ -1,0 +1,155 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_manager_client_OnlineAccountState.class does not contain class 
+gg_vape_manager_client_OnlineAccountState
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...ineAccountState:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "OnlineAccountState.java"
+public final class gg.vape.manager.client.OnlineAccountState extends java.lang.Enum<gg.vape.manager.client.OnlineAccountState> {
+  public static final gg.vape.manager.client.OnlineAccountState REGISTERED;
+
+  public static final gg.vape.manager.client.OnlineAccountState BANNED;
+
+  public static final gg.vape.manager.client.OnlineAccountState UNREGISTERED;
+
+  public static final gg.vape.manager.client.OnlineAccountState REGISTRATION_OFFLINE;
+
+  public static final gg.vape.manager.client.OnlineAccountState CONNECTING;
+
+  private static final gg.vape.manager.client.OnlineAccountState[] cachedValues;
+
+  private static final gg.vape.manager.client.OnlineAccountState[] $VALUES;
+
+  public static gg.vape.manager.client.OnlineAccountState[] values();
+    Code:
+         0: getstatic     #19                 // Field $VALUES:[Lgg/vape/manager/client/OnlineAccountState;
+         3: invokevirtual #24                 // Method "[Lgg/vape/manager/client/OnlineAccountState;".clone:()Ljava/lang/Object;
+         6: checkcast     #20                 // class "[Lgg/vape/manager/client/OnlineAccountState;"
+         9: areturn
+
+  public static gg.vape.manager.client.OnlineAccountState valueOf(java.lang.String);
+    Code:
+         0: ldc           #2                  // class gg/vape/manager/client/OnlineAccountState
+         2: aload_0
+         3: invokestatic  #29                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #2                  // class gg/vape/manager/client/OnlineAccountState
+         9: areturn
+
+  private gg.vape.manager.client.OnlineAccountState();
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #36                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: return
+
+  private static gg.vape.manager.client.OnlineAccountState[] $values();
+    Code:
+         0: iconst_5
+         1: anewarray     #2                  // class gg/vape/manager/client/OnlineAccountState
+         4: dup
+         5: iconst_0
+         6: getstatic     #40                 // Field REGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+         9: aastore
+        10: dup
+        11: iconst_1
+        12: getstatic     #42                 // Field BANNED:Lgg/vape/manager/client/OnlineAccountState;
+        15: aastore
+        16: dup
+        17: iconst_2
+        18: getstatic     #44                 // Field UNREGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+        21: aastore
+        22: dup
+        23: iconst_3
+        24: getstatic     #46                 // Field REGISTRATION_OFFLINE:Lgg/vape/manager/client/OnlineAccountState;
+        27: aastore
+        28: dup
+        29: iconst_4
+        30: getstatic     #48                 // Field CONNECTING:Lgg/vape/manager/client/OnlineAccountState;
+        33: aastore
+        34: areturn
+
+  static {};
+    Code:
+         0: new           #2                  // class gg/vape/manager/client/OnlineAccountState
+         3: dup
+         4: ldc           #50                 // String REGISTERED
+         6: iconst_0
+         7: invokespecial #51                 // Method "<init>":(Ljava/lang/String;I)V
+        10: putstatic     #40                 // Field REGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+        13: new           #2                  // class gg/vape/manager/client/OnlineAccountState
+        16: dup
+        17: ldc           #52                 // String BANNED
+        19: iconst_1
+        20: invokespecial #51                 // Method "<init>":(Ljava/lang/String;I)V
+        23: putstatic     #42                 // Field BANNED:Lgg/vape/manager/client/OnlineAccountState;
+        26: new           #2                  // class gg/vape/manager/client/OnlineAccountState
+        29: dup
+        30: ldc           #53                 // String UNREGISTERED
+        32: iconst_2
+        33: invokespecial #51                 // Method "<init>":(Ljava/lang/String;I)V
+        36: putstatic     #44                 // Field UNREGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+        39: new           #2                  // class gg/vape/manager/client/OnlineAccountState
+        42: dup
+        43: ldc           #54                 // String REGISTRATION_OFFLINE
+        45: iconst_3
+        46: invokespecial #51                 // Method "<init>":(Ljava/lang/String;I)V
+        49: putstatic     #46                 // Field REGISTRATION_OFFLINE:Lgg/vape/manager/client/OnlineAccountState;
+        52: new           #2                  // class gg/vape/manager/client/OnlineAccountState
+        55: dup
+        56: ldc           #55                 // String CONNECTING
+        58: iconst_4
+        59: invokespecial #51                 // Method "<init>":(Ljava/lang/String;I)V
+        62: putstatic     #48                 // Field CONNECTING:Lgg/vape/manager/client/OnlineAccountState;
+        65: invokestatic  #57                 // Method $values:()[Lgg/vape/manager/client/OnlineAccountState;
+        68: putstatic     #19                 // Field $VALUES:[Lgg/vape/manager/client/OnlineAccountState;
+        71: iconst_5
+        72: anewarray     #59                 // class java/lang/String
+        75: dup
+        76: iconst_0
+        77: ldc           #54                 // String REGISTRATION_OFFLINE
+        79: aastore
+        80: dup
+        81: iconst_1
+        82: ldc           #55                 // String CONNECTING
+        84: aastore
+        85: dup
+        86: iconst_2
+        87: ldc           #52                 // String BANNED
+        89: aastore
+        90: dup
+        91: iconst_3
+        92: ldc           #50                 // String REGISTERED
+        94: aastore
+        95: dup
+        96: iconst_4
+        97: ldc           #53                 // String UNREGISTERED
+        99: aastore
+       100: astore_0
+       101: iconst_5
+       102: anewarray     #2                  // class gg/vape/manager/client/OnlineAccountState
+       105: dup
+       106: iconst_0
+       107: getstatic     #40                 // Field REGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+       110: aastore
+       111: dup
+       112: iconst_1
+       113: getstatic     #42                 // Field BANNED:Lgg/vape/manager/client/OnlineAccountState;
+       116: aastore
+       117: dup
+       118: iconst_2
+       119: getstatic     #44                 // Field UNREGISTERED:Lgg/vape/manager/client/OnlineAccountState;
+       122: aastore
+       123: dup
+       124: iconst_3
+       125: getstatic     #46                 // Field REGISTRATION_OFFLINE:Lgg/vape/manager/client/OnlineAccountState;
+       128: aastore
+       129: dup
+       130: iconst_4
+       131: getstatic     #48                 // Field CONNECTING:Lgg/vape/manager/client/OnlineAccountState;
+       134: aastore
+       135: putstatic     #61                 // Field cachedValues:[Lgg/vape/manager/client/OnlineAccountState;
+       138: return
+}

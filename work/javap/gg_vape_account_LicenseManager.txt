@@ -1,0 +1,82 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_LicenseManager.class does not contain class 
+gg_vape_account_LicenseManager
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D..._LicenseManager:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "LicenseManager.java"
+public class gg.vape.account.LicenseManager {
+  private java.lang.String licenseKey;
+
+  private gg.vape.account.LicenseInfo licenseInfo;
+
+  private static int[] opaqueState;
+
+  public gg.vape.account.LicenseManager();
+    Code:
+         0: aload_0
+         1: invokespecial #15                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static int[] getOpaqueState();
+    Code:
+         0: getstatic     #21                 // Field opaqueState:[I
+         3: areturn
+
+  public gg.vape.account.LicenseInfo getLicenseInfo();
+    Code:
+         0: aload_0
+         1: getfield      #25                 // Field licenseInfo:Lgg/vape/account/LicenseInfo;
+         4: areturn
+
+  public static void setOpaqueState(int[]);
+    Code:
+         0: aload_0
+         1: putstatic     #21                 // Field opaqueState:[I
+         4: return
+
+  public gg.vape.account.LicenseStatus generateAccount();
+    Code:
+         0: aload_0
+         1: getfield      #32                 // Field licenseKey:Ljava/lang/String;
+         4: ifnonnull     9
+         7: aconst_null
+         8: areturn
+         9: new           #34                 // class gg/vape/account/LicenseStatusClient
+        12: dup
+        13: invokespecial #35                 // Method gg/vape/account/LicenseStatusClient."<init>":()V
+        16: aload_0
+        17: getfield      #32                 // Field licenseKey:Ljava/lang/String;
+        20: invokevirtual #38                 // Method gg/vape/account/LicenseStatusClient.generateAccount:(Ljava/lang/String;)Lgg/vape/account/LicenseStatus;
+        23: areturn
+
+  public gg.vape.account.LicenseInfo fetchLicenseInfo(java.lang.String);
+    Code:
+         0: aload_0
+         1: new           #42                 // class gg/vape/account/LicenseInfoClient
+         4: dup
+         5: invokespecial #43                 // Method gg/vape/account/LicenseInfoClient."<init>":()V
+         8: aload_1
+         9: invokevirtual #45                 // Method gg/vape/account/LicenseInfoClient.fetchLicenseInfo:(Ljava/lang/String;)Lgg/vape/account/LicenseInfo;
+        12: putfield      #25                 // Field licenseInfo:Lgg/vape/account/LicenseInfo;
+        15: aload_0
+        16: getfield      #25                 // Field licenseInfo:Lgg/vape/account/LicenseInfo;
+        19: ifnull        27
+        22: aload_0
+        23: aload_1
+        24: putfield      #32                 // Field licenseKey:Ljava/lang/String;
+        27: aload_0
+        28: getfield      #25                 // Field licenseInfo:Lgg/vape/account/LicenseInfo;
+        31: areturn
+
+  static {};
+    Code:
+         0: invokestatic  #48                 // Method getOpaqueState:()[I
+         3: ifnonnull     12
+         6: iconst_1
+         7: newarray       int
+         9: invokestatic  #50                 // Method setOpaqueState:([I)V
+        12: return
+}

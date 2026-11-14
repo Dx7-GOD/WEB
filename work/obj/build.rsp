@@ -1,0 +1,20 @@
+/nologo /W2 /O2 /MT /std:c++17 /EHsc
+/DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /DWINVER=0x0A00
+"/IC:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.51.36231\include"
+"/IC:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt"
+"/IC:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um"
+"/IC:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared"
+/Fo"d:\vape\work\obj\\"
+"d:\vape\work\src\src\main.cpp"
+"d:\vape\work\src\src\injector.cpp"
+"d:\vape\work\src\src\process_detector.cpp"
+"d:\vape\work\src\src\network.cpp"
+"d:\vape\work\src\src\streamer_mode.cpp"
+"d:\vape\work\src\src\ipc_server.cpp"
+/link
+/SUBSYSTEM:WINDOWS
+"/OUT:d:\vape\bypass\VapeV4_Streamer.exe"
+"/LIBPATH:C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.51.36231\lib\x64"
+"/LIBPATH:C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\x64"
+"/LIBPATH:C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64"
+kernel32.lib user32.lib winhttp.lib ws2_32.lib psapi.lib advapi32.lib

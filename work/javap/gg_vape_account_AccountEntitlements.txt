@@ -1,0 +1,79 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_AccountEntitlements.class does not contain class 
+gg_vape_account_AccountEntitlements
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...untEntitlements:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "AccountEntitlements.java"
+public class gg.vape.account.AccountEntitlements {
+  private boolean registered;
+
+  private final boolean licensed;
+
+  private final boolean banned;
+
+  public boolean isLicensed();
+    Code:
+         0: aload_0
+         1: getfield      #13                 // Field licensed:Z
+         4: ireturn
+
+  public boolean isRegistered();
+    Code:
+         0: aload_0
+         1: getfield      #18                 // Field registered:Z
+         4: ireturn
+
+  public void setRegistered(boolean);
+    Code:
+         0: aload_0
+         1: iload_1
+         2: putfield      #18                 // Field registered:Z
+         5: return
+
+  public boolean isBanned();
+    Code:
+         0: aload_0
+         1: getfield      #23                 // Field banned:Z
+         4: ireturn
+
+  gg.vape.account.AccountEntitlements(boolean, boolean, boolean);
+    Code:
+         0: aload_0
+         1: invokespecial #28                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: iload_1
+         6: putfield      #13                 // Field licensed:Z
+         9: aload_0
+        10: iload_2
+        11: putfield      #18                 // Field registered:Z
+        14: aload_0
+        15: iload_3
+        16: putfield      #23                 // Field banned:Z
+        19: return
+
+  static gg.vape.account.AccountEntitlements fromResponse(gg.vape.account.AccountInfoResponse);
+    Code:
+         0: aload_0
+         1: invokestatic  #33                 // Method fromNullableResponse:(Lgg/vape/account/AccountInfoResponse;)Lgg/vape/account/AccountEntitlements;
+         4: areturn
+
+  private static gg.vape.account.AccountEntitlements fromNullableResponse(gg.vape.account.AccountInfoResponse);
+    Code:
+         0: aload_0
+         1: ifnonnull     6
+         4: aconst_null
+         5: areturn
+         6: new           #2                  // class gg/vape/account/AccountEntitlements
+         9: dup
+        10: aload_0
+        11: invokevirtual #43                 // Method gg/vape/account/AccountInfoResponse.isLicensed:()Z
+        14: aload_0
+        15: invokevirtual #45                 // Method gg/vape/account/AccountInfoResponse.isRegistered:()Z
+        18: aload_0
+        19: invokevirtual #47                 // Method gg/vape/account/AccountInfoResponse.isBanned:()Z
+        22: invokespecial #49                 // Method "<init>":(ZZZ)V
+        25: areturn
+}

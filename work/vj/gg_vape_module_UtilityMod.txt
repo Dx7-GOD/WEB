@@ -1,0 +1,40 @@
+﻿Compiled from "UtilityMod.java"
+public class gg.vape.module.UtilityMod extends gg.vape.module.Mod {
+  public gg.vape.module.UtilityMod(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iconst_0
+         3: iconst_0
+         4: getstatic     #13                 // Field gg/vape/module/Category.UTILITY:Lgg/vape/module/Category;
+         7: ldc           #15                 // String
+         9: invokespecial #18                 // Method gg/vape/module/Mod."<init>":(Ljava/lang/String;IILgg/vape/module/Category;Ljava/lang/String;)V
+        12: return
+
+  public gg.vape.module.UtilityMod(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iconst_0
+         3: iconst_0
+         4: getstatic     #13                 // Field gg/vape/module/Category.UTILITY:Lgg/vape/module/Category;
+         7: aload_2
+         8: invokespecial #18                 // Method gg/vape/module/Mod."<init>":(Ljava/lang/String;IILgg/vape/module/Category;Ljava/lang/String;)V
+        11: return
+
+  public boolean isRequiresBind();
+    Code:
+         0: iconst_1
+         1: ireturn
+
+  public gg.vape.module.UtilityMod(java.lang.String, gg.vape.module.Category, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: iconst_0
+         3: iconst_0
+         4: aload_2
+         5: aload_3
+         6: invokespecial #18                 // Method gg/vape/module/Mod."<init>":(Ljava/lang/String;IILgg/vape/module/Category;Ljava/lang/String;)V
+         9: return
+}

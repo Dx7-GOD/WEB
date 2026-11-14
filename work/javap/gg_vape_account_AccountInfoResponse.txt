@@ -1,0 +1,151 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_AccountInfoResponse.class does not contain class 
+gg_vape_account_AccountInfoResponse
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...untInfoResponse:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "AccountInfoResponse.java"
+public class gg.vape.account.AccountInfoResponse {
+  private final java.lang.String username;
+
+  private final boolean banned;
+
+  private final long userId;
+
+  private final java.util.Date accountCreationDate;
+
+  private final boolean registered;
+
+  private final boolean licensed;
+
+  private final boolean profilesEnabled;
+
+  public boolean isLicensed();
+    Code:
+         0: aload_0
+         1: getfield      #21                 // Field licensed:Z
+         4: ireturn
+
+  public boolean hasProfilesEnabled();
+    Code:
+         0: aload_0
+         1: getfield      #26                 // Field profilesEnabled:Z
+         4: ireturn
+
+  gg.vape.account.AccountInfoResponse(long, java.lang.String, java.util.Date, boolean, boolean, boolean, boolean);
+    Code:
+         0: aload_0
+         1: invokespecial #31                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: lload_1
+         6: putfield      #33                 // Field userId:J
+         9: aload_0
+        10: aload_3
+        11: putfield      #35                 // Field username:Ljava/lang/String;
+        14: aload_0
+        15: aload         4
+        17: putfield      #37                 // Field accountCreationDate:Ljava/util/Date;
+        20: aload_0
+        21: iload         5
+        23: putfield      #21                 // Field licensed:Z
+        26: aload_0
+        27: iload         6
+        29: putfield      #39                 // Field registered:Z
+        32: aload_0
+        33: iload         7
+        35: putfield      #26                 // Field profilesEnabled:Z
+        38: aload_0
+        39: iload         8
+        41: putfield      #41                 // Field banned:Z
+        44: return
+
+  public java.lang.String getUsername();
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field username:Ljava/lang/String;
+         4: areturn
+
+  private static java.text.ParseException preserveParseException(java.text.ParseException);
+    Code:
+         0: aload_0
+         1: areturn
+
+  public boolean isRegistered();
+    Code:
+         0: aload_0
+         1: getfield      #39                 // Field registered:Z
+         4: ireturn
+
+  public static gg.vape.account.AccountInfoResponse fromJson(com.google.gson.JsonElement);
+    Code:
+         0: aload_0
+         1: ifnull        11
+         4: aload_0
+         5: invokevirtual #60                 // Method com/google/gson/JsonElement.isJsonNull:()Z
+         8: ifeq          13
+        11: aconst_null
+        12: areturn
+        13: aload_0
+        14: invokevirtual #64                 // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+        17: astore_1
+        18: new           #2                  // class gg/vape/account/AccountInfoResponse
+        21: dup
+        22: aload_1
+        23: ldc           #65                 // String userId
+        25: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        28: invokevirtual #75                 // Method com/google/gson/JsonElement.getAsLong:()J
+        31: aload_1
+        32: ldc           #76                 // String username
+        34: invokestatic  #82                 // Method gg/vape/config/ConfigJsonUtils.getString:(Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/String;
+        37: aload_1
+        38: ldc           #84                 // String accountCreation
+        40: invokestatic  #82                 // Method gg/vape/config/ConfigJsonUtils.getString:(Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/String;
+        43: invokestatic  #90                 // Method gg/vape/api/ApiHttpClient.parseApiDate:(Ljava/lang/String;)Ljava/util/Date;
+        46: aload_1
+        47: ldc           #91                 // String licensed
+        49: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        52: invokevirtual #94                 // Method com/google/gson/JsonElement.getAsBoolean:()Z
+        55: aload_1
+        56: ldc           #95                 // String registered
+        58: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        61: invokevirtual #94                 // Method com/google/gson/JsonElement.getAsBoolean:()Z
+        64: aload_1
+        65: ldc           #97                 // String profiles
+        67: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        70: invokevirtual #94                 // Method com/google/gson/JsonElement.getAsBoolean:()Z
+        73: aload_1
+        74: ldc           #98                 // String banned
+        76: invokevirtual #71                 // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        79: invokevirtual #94                 // Method com/google/gson/JsonElement.getAsBoolean:()Z
+        82: invokespecial #100                // Method "<init>":(JLjava/lang/String;Ljava/util/Date;ZZZZ)V
+        85: areturn
+        86: astore_2
+        87: new           #102                // class java/lang/RuntimeException
+        90: dup
+        91: aload_2
+        92: invokespecial #105                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+        95: athrow
+      Exception table:
+         from    to  target type
+            18    85    86   Class java/text/ParseException
+
+  public java.util.Date getAccountCreationDate();
+    Code:
+         0: aload_0
+         1: getfield      #37                 // Field accountCreationDate:Ljava/util/Date;
+         4: areturn
+
+  public boolean isBanned();
+    Code:
+         0: aload_0
+         1: getfield      #41                 // Field banned:Z
+         4: ireturn
+
+  public long getUserId();
+    Code:
+         0: aload_0
+         1: getfield      #33                 // Field userId:J
+         4: lreturn
+}

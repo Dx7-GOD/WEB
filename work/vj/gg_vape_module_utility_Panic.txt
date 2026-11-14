@@ -1,0 +1,135 @@
+﻿Compiled from "Panic.java"
+public class gg.vape.module.utility.Panic extends gg.vape.module.UtilityMod {
+  private boolean reEnableActive;
+
+  private final gg.vape.value.BooleanValue reEnable;
+
+  private final java.util.List<gg.vape.module.Mod> disabledMods;
+
+  public gg.vape.module.utility.Panic();
+    Code:
+         0: aload_0
+         1: ldc           #16                 // String Panic
+         3: ldc           #18                 // String Disables all currently enabled modules
+         5: invokespecial #21                 // Method gg/vape/module/UtilityMod."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+         8: aload_0
+         9: iconst_0
+        10: putfield      #23                 // Field reEnableActive:Z
+        13: aload_0
+        14: aload_0
+        15: ldc           #25                 // String Re-enable
+        17: iconst_0
+        18: ldc           #27                 // String Re-enables all previously enabled modules upon pressing bind a second time
+        20: invokestatic  #33                 // Method gg/vape/value/BooleanValue.create:(Ljava/lang/Object;Ljava/lang/String;ZLjava/lang/String;)Lgg/vape/value/BooleanValue;
+        23: putfield      #35                 // Field reEnable:Lgg/vape/value/BooleanValue;
+        26: aload_0
+        27: new           #37                 // class java/util/ArrayList
+        30: dup
+        31: invokespecial #39                 // Method java/util/ArrayList."<init>":()V
+        34: putfield      #41                 // Field disabledMods:Ljava/util/List;
+        37: aload_0
+        38: iconst_0
+        39: invokevirtual #45                 // Method setDefaultVisibility:(Z)V
+        42: aload_0
+        43: iconst_1
+        44: anewarray     #47                 // class gg/vape/value/Value
+        47: dup
+        48: iconst_0
+        49: aload_0
+        50: getfield      #35                 // Field reEnable:Lgg/vape/value/BooleanValue;
+        53: aastore
+        54: invokevirtual #51                 // Method addValue:([Lgg/vape/value/Value;)V
+        57: return
+
+  public void U(gg.vape.module.Mod);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: if_acmpeq     19
+         5: aload_0
+         6: iconst_0
+         7: putfield      #23                 // Field reEnableActive:Z
+        10: aload_0
+        11: getfield      #41                 // Field disabledMods:Ljava/util/List;
+        14: invokeinterface #60,  1           // InterfaceMethod java/util/List.clear:()V
+        19: return
+
+  public void onEnable();
+    Code:
+         0: aload_0
+         1: iconst_0
+         2: invokevirtual #66                 // Method setEnabled:(Z)V
+         5: aload_0
+         6: getfield      #35                 // Field reEnable:Lgg/vape/value/BooleanValue;
+         9: invokevirtual #70                 // Method gg/vape/value/BooleanValue.getEffectiveValue:()Ljava/lang/Boolean;
+        12: invokevirtual #76                 // Method java/lang/Boolean.booleanValue:()Z
+        15: ifeq          88
+        18: aload_0
+        19: aload_0
+        20: getfield      #23                 // Field reEnableActive:Z
+        23: ifne          30
+        26: iconst_1
+        27: goto          31
+        30: iconst_0
+        31: putfield      #23                 // Field reEnableActive:Z
+        34: aload_0
+        35: getfield      #23                 // Field reEnableActive:Z
+        38: ifne          93
+        41: aload_0
+        42: getfield      #41                 // Field disabledMods:Ljava/util/List;
+        45: invokeinterface #80,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        50: astore_1
+        51: aload_1
+        52: invokeinterface #85,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        57: ifeq          78
+        60: aload_1
+        61: invokeinterface #89,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        66: checkcast     #91                 // class gg/vape/module/Mod
+        69: astore_2
+        70: aload_2
+        71: iconst_1
+        72: invokevirtual #92                 // Method gg/vape/module/Mod.setEnabled:(Z)V
+        75: goto          51
+        78: aload_0
+        79: getfield      #41                 // Field disabledMods:Ljava/util/List;
+        82: invokeinterface #60,  1           // InterfaceMethod java/util/List.clear:()V
+        87: return
+        88: aload_0
+        89: iconst_0
+        90: putfield      #23                 // Field reEnableActive:Z
+        93: getstatic     #98                 // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+        96: invokevirtual #102                // Method gg/vape/Vape.getModManager:()Lgg/vape/manager/ModManager;
+        99: invokevirtual #108                // Method gg/vape/manager/ModManager.collectMods:()Ljava/util/Collection;
+       102: invokeinterface #111,  1          // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+       107: astore_1
+       108: aload_1
+       109: invokeinterface #85,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       114: ifeq          177
+       117: aload_1
+       118: invokeinterface #89,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       123: checkcast     #91                 // class gg/vape/module/Mod
+       126: astore_2
+       127: aload_2
+       128: invokevirtual #114                // Method gg/vape/module/Mod.isEnabled:()Z
+       131: ifeq          108
+       134: aload_2
+       135: aload_0
+       136: if_acmpne     142
+       139: goto          108
+       142: aload_2
+       143: iconst_0
+       144: invokevirtual #92                 // Method gg/vape/module/Mod.setEnabled:(Z)V
+       147: aload_0
+       148: getfield      #35                 // Field reEnable:Lgg/vape/value/BooleanValue;
+       151: invokevirtual #70                 // Method gg/vape/value/BooleanValue.getEffectiveValue:()Ljava/lang/Boolean;
+       154: invokevirtual #76                 // Method java/lang/Boolean.booleanValue:()Z
+       157: ifne          163
+       160: goto          108
+       163: aload_0
+       164: getfield      #41                 // Field disabledMods:Ljava/util/List;
+       167: aload_2
+       168: invokeinterface #118,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       173: pop
+       174: goto          108
+       177: return
+}

@@ -1,0 +1,331 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_protocol_ZeusAuthenticatedProtocolState.class does not contain 
+class gg_vape_protocol_ZeusAuthenticatedProtocolState
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...edProtocolState:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "ZeusAuthenticatedProtocolState.java"
+final class gg.vape.protocol.ZeusAuthenticatedProtocolState {
+  private final gg.vape.protocol.ZeusProtocolState state;
+
+  private gg.vape.protocol.ZeusAuthenticatedProtocolState(gg.vape.protocol.ZeusProtocolState);
+    Code:
+         0: aload_0
+         1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #14                 // Field state:Lgg/vape/protocol/ZeusProtocolState;
+         9: aload_0
+        10: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+        13: ldc           #22                 // class gg/vape/protocol/packet/ShowUsernamePacket
+        15: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        18: aload_0
+        19: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+        22: ldc           #28                 // class gg/vape/protocol/packet/UserDisplayNamePacket
+        24: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        27: aload_0
+        28: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        31: ldc           #33                 // class gg/vape/protocol/packet/UserDisplayNameResponsePacket
+        33: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        36: aload_0
+        37: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+        40: ldc           #35                 // class gg/vape/protocol/packet/FriendsListPacket
+        42: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        45: aload_0
+        46: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        49: ldc           #37                 // class gg/vape/protocol/packet/FriendsListResponsePacket
+        51: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        54: aload_0
+        55: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        58: ldc           #39                 // class gg/vape/protocol/packet/ServerFriendModelPacket
+        60: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        63: aload_0
+        64: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+        67: ldc           #41                 // class gg/vape/protocol/packet/FriendDeletePacket
+        69: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        72: aload_0
+        73: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        76: ldc           #43                 // class gg/vape/protocol/packet/FriendDeleteResponsePacket
+        78: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        81: aload_0
+        82: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        85: ldc           #45                 // class gg/vape/protocol/packet/ServerFriendRemovedPacket
+        87: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        90: aload_0
+        91: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+        94: ldc           #47                 // class gg/vape/protocol/packet/ServerFriendPresenceStatePacket
+        96: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+        99: aload_0
+       100: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       103: ldc           #49                 // class gg/vape/protocol/packet/FriendRequestPacket
+       105: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       108: aload_0
+       109: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       112: ldc           #51                 // class gg/vape/protocol/packet/FriendRequestUpdatePacket
+       114: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       117: aload_0
+       118: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       121: ldc           #53                 // class gg/vape/protocol/packet/ServerFriendRequestPacket
+       123: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       126: aload_0
+       127: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       130: ldc           #55                 // class gg/vape/protocol/packet/ServerFriendRequestRemovedPacket
+       132: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       135: aload_0
+       136: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       139: ldc           #57                 // class gg/vape/protocol/packet/FriendRequestResponsePacket
+       141: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       144: aload_0
+       145: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       148: ldc           #59                 // class gg/vape/protocol/packet/FriendRequestUpdateResponsePacket
+       150: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       153: aload_0
+       154: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       157: ldc           #61                 // class gg/vape/protocol/packet/ChatToFriendPacket
+       159: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       162: aload_0
+       163: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       166: ldc           #63                 // class gg/vape/protocol/packet/ChatToFriendResponsePacket
+       168: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       171: aload_0
+       172: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       175: ldc           #65                 // class gg/vape/protocol/packet/ServerGroupChatMessagePacket
+       177: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       180: aload_0
+       181: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       184: ldc           #67                 // class gg/vape/protocol/packet/GroupCreatePacket
+       186: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       189: aload_0
+       190: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       193: ldc           #69                 // class gg/vape/protocol/packet/GroupCreateResponsePacket
+       195: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       198: aload_0
+       199: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       202: ldc           #71                 // class gg/vape/protocol/packet/GroupLeavePacket
+       204: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       207: aload_0
+       208: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       211: ldc           #73                 // class gg/vape/protocol/packet/GroupLeaveResponsePacket
+       213: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       216: aload_0
+       217: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       220: ldc           #75                 // class gg/vape/protocol/packet/GroupDeletePacket
+       222: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       225: aload_0
+       226: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       229: ldc           #77                 // class gg/vape/protocol/packet/GroupDeleteResponsePacket
+       231: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       234: aload_0
+       235: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       238: ldc           #79                 // class gg/vape/protocol/packet/ServerGroupDeletedPacket
+       240: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       243: aload_0
+       244: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       247: ldc           #81                 // class gg/vape/protocol/packet/ServerPartyMemberUpdatePacket
+       249: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       252: aload_0
+       253: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       256: ldc           #83                 // class gg/vape/protocol/packet/ServerGroupInviteUpdatePacket
+       258: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       261: aload_0
+       262: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       265: ldc           #85                 // class gg/vape/protocol/packet/GroupInvitePacket
+       267: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       270: aload_0
+       271: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       274: ldc           #87                 // class gg/vape/protocol/packet/GroupInviteResponsePacket
+       276: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       279: aload_0
+       280: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       283: ldc           #89                 // class gg/vape/protocol/packet/GroupUninvitePacket
+       285: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       288: aload_0
+       289: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       292: ldc           #91                 // class gg/vape/protocol/packet/GroupUninviteResponsePacket
+       294: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       297: aload_0
+       298: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       301: ldc           #93                 // class gg/vape/protocol/packet/ClientGroupLeaderKickPacket
+       303: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       306: aload_0
+       307: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       310: ldc           #95                 // class gg/vape/protocol/packet/ClientGroupLeaderKickResponsePacket
+       312: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       315: aload_0
+       316: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       319: ldc           #97                 // class gg/vape/protocol/packet/ClientGroupLeaderPromotePacket
+       321: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       324: aload_0
+       325: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       328: ldc           #99                 // class gg/vape/protocol/packet/ClientGroupLeaderPromoteResponsePacket
+       330: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       333: aload_0
+       334: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       337: ldc           #101                // class gg/vape/protocol/packet/ServerGroupLeaderChangedPacket
+       339: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       342: aload_0
+       343: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       346: ldc           #103                // class gg/vape/protocol/packet/ServerGroupInviteRemovedPacket
+       348: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       351: aload_0
+       352: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       355: ldc           #105                // class gg/vape/protocol/packet/ServerGroupInvitePacket
+       357: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       360: aload_0
+       361: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       364: ldc           #107                // class gg/vape/protocol/packet/GroupInviteStatePacket
+       366: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       369: aload_0
+       370: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       373: ldc           #109                // class gg/vape/protocol/packet/GroupInviteStateResponsePacket
+       375: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       378: aload_0
+       379: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       382: ldc           #111                // class gg/vape/protocol/packet/GroupOptionUpdatePacket
+       384: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       387: aload_0
+       388: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       391: ldc           #113                // class gg/vape/protocol/packet/ServerGroupOptionUpdatePacket
+       393: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       396: aload_0
+       397: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       400: ldc           #115                // class gg/vape/protocol/packet/GroupChatPacket
+       402: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       405: aload_0
+       406: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       409: ldc           #117                // class gg/vape/protocol/packet/GroupChatResponsePacket
+       411: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       414: aload_0
+       415: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       418: ldc           #119                // class gg/vape/protocol/packet/ServerFriendChatMessagePacket
+       420: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       423: aload_0
+       424: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       427: ldc           #121                // class gg/vape/protocol/packet/PingPacket
+       429: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       432: aload_0
+       433: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       436: ldc           #123                // class gg/vape/protocol/packet/PingResponsePacket
+       438: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       441: aload_0
+       442: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       445: ldc           #125                // class gg/vape/protocol/packet/ServerPingPacket
+       447: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       450: aload_0
+       451: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       454: ldc           #127                // class gg/vape/protocol/packet/ServerUserDisplayNamePacket
+       456: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       459: aload_0
+       460: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       463: ldc           #129                // class gg/vape/protocol/packet/ClientMinecraftProfilePacket
+       465: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       468: aload_0
+       469: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       472: ldc           #131                // class gg/vape/protocol/packet/FriendMinecraftProfileUpdatePacket
+       474: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       477: aload_0
+       478: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       481: ldc           #133                // class gg/vape/protocol/packet/ClientServerAddressPacket
+       483: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       486: aload_0
+       487: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       490: ldc           #135                // class gg/vape/protocol/packet/FriendServerAddressPacket
+       492: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       495: aload_0
+       496: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       499: ldc           #137                // class gg/vape/protocol/packet/ClientFriendActivityUsersPacket
+       501: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       504: aload_0
+       505: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       508: ldc           #139                // class gg/vape/protocol/packet/FriendActivityUsersPacket
+       510: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       513: aload_0
+       514: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       517: ldc           #141                // class gg/vape/protocol/packet/ClientActivitySnapshotPacket
+       519: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       522: aload_0
+       523: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       526: ldc           #143                // class gg/vape/protocol/packet/ActivitySnapshotsPacket
+       528: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       531: aload_0
+       532: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       535: ldc           #145                // class gg/vape/protocol/packet/ClientBlockLocationPacket
+       537: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       540: aload_0
+       541: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       544: ldc           #147                // class gg/vape/protocol/packet/LocationCheckPacket
+       546: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       549: aload_0
+       550: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       553: ldc           #149                // class gg/vape/protocol/packet/LocationCheckResponsePacket
+       555: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       558: aload_0
+       559: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       562: ldc           #151                // class gg/vape/protocol/packet/FriendVisibilityUpdatePacket
+       564: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       567: aload_0
+       568: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       571: ldc           #153                // class gg/vape/protocol/packet/PresenceStateUpdatePacket
+       573: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       576: aload_0
+       577: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       580: ldc           #155                // class gg/vape/protocol/packet/ServerHeldItemSlotPacket
+       582: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       585: aload_0
+       586: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       589: ldc           #157                // class gg/vape/protocol/packet/ClientHeldItemSlotPacket
+       591: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       594: aload_0
+       595: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       598: ldc           #159                // class gg/vape/protocol/packet/ClientInventorySnapshotPacket
+       600: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       603: aload_0
+       604: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       607: ldc           #161                // class gg/vape/protocol/packet/ServerInventorySnapshotPacket
+       609: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       612: aload_0
+       613: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       616: ldc           #163                // class gg/vape/protocol/packet/ClientInventoryUpdatePacket
+       618: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       621: aload_0
+       622: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       625: ldc           #165                // class gg/vape/protocol/packet/ServerInventoryUpdatePacket
+       627: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       630: aload_0
+       631: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       634: ldc           #167                // class gg/vape/protocol/packet/ClientCpsPacket
+       636: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       639: aload_0
+       640: getstatic     #31                 // Field gg/vape/protocol/ZeusPacketDirection.CLIENT:Lgg/vape/protocol/ZeusPacketDirection;
+       643: ldc           #169                // class gg/vape/protocol/packet/FriendCpsPacket
+       645: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       648: aload_0
+       649: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       652: ldc           #171                // class gg/vape/protocol/packet/ClientProfileIdPacket
+       654: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       657: aload_0
+       658: getstatic     #20                 // Field gg/vape/protocol/ZeusPacketDirection.SERVER:Lgg/vape/protocol/ZeusPacketDirection;
+       661: ldc           #173                // class gg/vape/protocol/packet/ZeusClientReadyPacket
+       663: invokespecial #26                 // Method registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+       666: return
+
+  static void register(gg.vape.protocol.ZeusProtocolState);
+    Code:
+         0: new           #2                  // class gg/vape/protocol/ZeusAuthenticatedProtocolState
+         3: dup
+         4: aload_0
+         5: invokespecial #178                // Method "<init>":(Lgg/vape/protocol/ZeusProtocolState;)V
+         8: pop
+         9: return
+
+  private void registerPacket(gg.vape.protocol.ZeusPacketDirection, java.lang.Class<? extends gg.vape.protocol.packet.ZeusSerializablePacket>);
+    Code:
+         0: aload_0
+         1: getfield      #14                 // Field state:Lgg/vape/protocol/ZeusProtocolState;
+         4: aload_1
+         5: aload_2
+         6: invokevirtual #182                // Method gg/vape/protocol/ZeusProtocolState.registerPacket:(Lgg/vape/protocol/ZeusPacketDirection;Ljava/lang/Class;)V
+         9: return
+}

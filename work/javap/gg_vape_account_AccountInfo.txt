@@ -1,0 +1,99 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_AccountInfo.class does not contain class 
+gg_vape_account_AccountInfo
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...unt_AccountInfo:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "AccountInfo.java"
+public class gg.vape.account.AccountInfo {
+  private final long userId;
+
+  private final java.util.Date accountCreationDate;
+
+  private final boolean profilesEnabled;
+
+  private final gg.vape.account.AccountEntitlements entitlements;
+
+  private java.lang.String username;
+
+  public void setUsername(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: putfield      #21                 // Field username:Ljava/lang/String;
+         5: return
+
+  public boolean hasProfilesEnabled();
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field profilesEnabled:Z
+         4: ireturn
+
+  public java.lang.String getUsername();
+    Code:
+         0: aload_0
+         1: getfield      #21                 // Field username:Ljava/lang/String;
+         4: areturn
+
+  public long getUserId();
+    Code:
+         0: aload_0
+         1: getfield      #33                 // Field userId:J
+         4: lreturn
+
+  public gg.vape.account.AccountEntitlements getEntitlements();
+    Code:
+         0: aload_0
+         1: getfield      #37                 // Field entitlements:Lgg/vape/account/AccountEntitlements;
+         4: areturn
+
+  public java.util.Date getAccountCreationDate();
+    Code:
+         0: aload_0
+         1: getfield      #41                 // Field accountCreationDate:Ljava/util/Date;
+         4: areturn
+
+  public static gg.vape.account.AccountInfo fromResponse(gg.vape.account.AccountInfoResponse);
+    Code:
+         0: aload_0
+         1: ifnonnull     6
+         4: aconst_null
+         5: areturn
+         6: new           #2                  // class gg/vape/account/AccountInfo
+         9: dup
+        10: aload_0
+        11: invokevirtual #50                 // Method gg/vape/account/AccountInfoResponse.getUserId:()J
+        14: aload_0
+        15: invokevirtual #52                 // Method gg/vape/account/AccountInfoResponse.getUsername:()Ljava/lang/String;
+        18: aload_0
+        19: invokevirtual #54                 // Method gg/vape/account/AccountInfoResponse.getAccountCreationDate:()Ljava/util/Date;
+        22: aload_0
+        23: invokevirtual #56                 // Method gg/vape/account/AccountInfoResponse.hasProfilesEnabled:()Z
+        26: aload_0
+        27: invokestatic  #61                 // Method gg/vape/account/AccountEntitlements.fromResponse:(Lgg/vape/account/AccountInfoResponse;)Lgg/vape/account/AccountEntitlements;
+        30: invokespecial #65                 // Method "<init>":(JLjava/lang/String;Ljava/util/Date;ZLgg/vape/account/AccountEntitlements;)V
+        33: areturn
+
+  gg.vape.account.AccountInfo(long, java.lang.String, java.util.Date, boolean, gg.vape.account.AccountEntitlements);
+    Code:
+         0: aload_0
+         1: invokespecial #70                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: lload_1
+         6: putfield      #33                 // Field userId:J
+         9: aload_0
+        10: aload_3
+        11: putfield      #21                 // Field username:Ljava/lang/String;
+        14: aload_0
+        15: aload         4
+        17: putfield      #41                 // Field accountCreationDate:Ljava/util/Date;
+        20: aload_0
+        21: iload         5
+        23: putfield      #27                 // Field profilesEnabled:Z
+        26: aload_0
+        27: aload         6
+        29: putfield      #37                 // Field entitlements:Lgg/vape/account/AccountEntitlements;
+        32: return
+}

@@ -1,0 +1,89 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_protocol_packet_AuthenticationPacket.class does not contain class 
+gg_vape_protocol_packet_AuthenticationPacket
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...nticationPacket:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "AuthenticationPacket.java"
+public class gg.vape.protocol.packet.AuthenticationPacket extends gg.vape.protocol.packet.ZeusTrackedPacket<gg.vape.protocol.packet.AuthenticationResponsePacket> {
+  private java.util.UUID I;
+
+  private java.lang.String E;
+
+  private java.lang.String V;
+
+  public void x(gg.vape.protocol.ZeusPacketBuffer);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: sipush        255
+         5: invokevirtual #19                 // Method gg/vape/protocol/ZeusPacketBuffer.readString:(I)Ljava/lang/String;
+         8: putfield      #21                 // Field E:Ljava/lang/String;
+        11: aload_0
+        12: aload_1
+        13: invokevirtual #25                 // Method gg/vape/protocol/ZeusPacketBuffer.readUuid:()Ljava/util/UUID;
+        16: putfield      #27                 // Field I:Ljava/util/UUID;
+        19: aload_0
+        20: aload_1
+        21: bipush        16
+        23: invokevirtual #19                 // Method gg/vape/protocol/ZeusPacketBuffer.readString:(I)Ljava/lang/String;
+        26: putfield      #29                 // Field V:Ljava/lang/String;
+        29: return
+
+  public java.util.UUID i();
+    Code:
+         0: aload_0
+         1: getfield      #27                 // Field I:Ljava/util/UUID;
+         4: areturn
+
+  public java.lang.String W();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field V:Ljava/lang/String;
+         4: areturn
+
+  public void T(gg.vape.protocol.ZeusPacketBuffer);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: getfield      #21                 // Field E:Ljava/lang/String;
+         5: invokevirtual #41                 // Method gg/vape/protocol/ZeusPacketBuffer.writeString:(Ljava/lang/String;)V
+         8: aload_1
+         9: aload_0
+        10: getfield      #27                 // Field I:Ljava/util/UUID;
+        13: invokevirtual #45                 // Method gg/vape/protocol/ZeusPacketBuffer.writeUuid:(Ljava/util/UUID;)V
+        16: aload_1
+        17: aload_0
+        18: getfield      #29                 // Field V:Ljava/lang/String;
+        21: invokevirtual #41                 // Method gg/vape/protocol/ZeusPacketBuffer.writeString:(Ljava/lang/String;)V
+        24: return
+
+  public gg.vape.protocol.packet.AuthenticationPacket();
+    Code:
+         0: aload_0
+         1: invokespecial #49                 // Method gg/vape/protocol/packet/ZeusTrackedPacket."<init>":()V
+         4: return
+
+  public gg.vape.protocol.packet.AuthenticationPacket(java.lang.String, java.util.UUID, java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #49                 // Method gg/vape/protocol/packet/ZeusTrackedPacket."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #21                 // Field E:Ljava/lang/String;
+         9: aload_0
+        10: aload_2
+        11: putfield      #27                 // Field I:Ljava/util/UUID;
+        14: aload_0
+        15: aload_3
+        16: putfield      #29                 // Field V:Ljava/lang/String;
+        19: return
+
+  public java.lang.String q();
+    Code:
+         0: aload_0
+         1: getfield      #21                 // Field E:Ljava/lang/String;
+         4: areturn
+}

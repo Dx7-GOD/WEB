@@ -1,0 +1,2221 @@
+﻿Compiled from "ModManager.java"
+public class gg.vape.manager.ModManager implements gg.vape.event.EventListener {
+  private static gg.vape.ui.click.component.GuiComponent[] legacyCategoryComponents;
+
+  private java.util.Map<java.lang.Class<? extends gg.vape.module.Mod>, gg.vape.module.Mod> allModulesByType;
+
+  private java.util.ArrayList<gg.vape.module.Mod> activeModuleList;
+
+  private java.util.HashSet<gg.vape.module.Mod> enabledModules;
+
+  private gg.vape.module.world.XRay xrayModule;
+
+  private gg.vape.notification.ReusableTextNotification profileSwitchNotification;
+
+  private java.util.Map<java.lang.Class<? extends gg.vape.module.Mod>, gg.vape.module.Mod> activeModulesByType;
+
+  private boolean suppressStateNotifications;
+
+  public java.util.Collection<gg.vape.module.Mod> getTopLevelModules();
+    Code:
+         0: new           #40                 // class java/util/ArrayList
+         3: dup
+         4: invokespecial #44                 // Method java/util/ArrayList."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: invokevirtual #47                 // Method getAllModules:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_2
+        18: aload_2
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          56
+        27: aload_2
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore_3
+        37: aload_3
+        38: instanceof    #67                 // class gg/vape/module/SubModule
+        41: ifeq          47
+        44: goto          18
+        47: aload_1
+        48: aload_3
+        49: invokevirtual #71                 // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+        52: pop
+        53: goto          18
+        56: aload_1
+        57: areturn
+
+  public void init();
+    Code:
+         0: invokestatic  #83                 // Method gg/vape/module/Category.getLegacyComponents:()[Lgg/vape/ui/click/component/GuiComponent;
+         3: astore_1
+         4: bipush        61
+         6: anewarray     #65                 // class gg/vape/module/Mod
+         9: astore_2
+        10: aload_2
+        11: iconst_0
+        12: new           #85                 // class gg/vape/module/none/ClientSettings
+        15: dup
+        16: invokespecial #86                 // Method gg/vape/module/none/ClientSettings."<init>":()V
+        19: aastore
+        20: aload_2
+        21: iconst_1
+        22: new           #88                 // class gg/vape/module/combat/LeftClicker
+        25: dup
+        26: invokespecial #89                 // Method gg/vape/module/combat/LeftClicker."<init>":()V
+        29: aastore
+        30: aload_2
+        31: iconst_2
+        32: new           #91                 // class gg/vape/module/combat/RightClicker
+        35: dup
+        36: invokespecial #92                 // Method gg/vape/module/combat/RightClicker."<init>":()V
+        39: aastore
+        40: aload_2
+        41: iconst_3
+        42: new           #94                 // class gg/vape/module/combat/Velocity
+        45: dup
+        46: invokespecial #95                 // Method gg/vape/module/combat/Velocity."<init>":()V
+        49: aastore
+        50: aload_2
+        51: iconst_4
+        52: new           #97                 // class gg/vape/module/combat/JumpReset
+        55: dup
+        56: invokespecial #98                 // Method gg/vape/module/combat/JumpReset."<init>":()V
+        59: aastore
+        60: aload_2
+        61: iconst_5
+        62: new           #100                // class gg/vape/module/combat/KnockbackDelay
+        65: dup
+        66: invokespecial #101                // Method gg/vape/module/combat/KnockbackDelay."<init>":()V
+        69: aastore
+        70: aload_2
+        71: bipush        6
+        73: new           #103                // class gg/vape/module/combat/Reach
+        76: dup
+        77: invokespecial #104                // Method gg/vape/module/combat/Reach."<init>":()V
+        80: aastore
+        81: aload_2
+        82: bipush        7
+        84: new           #106                // class gg/vape/module/utility/Throwpot
+        87: dup
+        88: invokespecial #107                // Method gg/vape/module/utility/Throwpot."<init>":()V
+        91: aastore
+        92: aload_2
+        93: bipush        8
+        95: new           #109                // class gg/vape/module/utility/Refill
+        98: dup
+        99: invokespecial #110                // Method gg/vape/module/utility/Refill."<init>":()V
+       102: aastore
+       103: aload_2
+       104: bipush        9
+       106: new           #112                // class gg/vape/module/render/Tracers
+       109: dup
+       110: invokespecial #113                // Method gg/vape/module/render/Tracers."<init>":()V
+       113: aastore
+       114: aload_2
+       115: bipush        10
+       117: new           #115                // class gg/vape/module/render/NameTags
+       120: dup
+       121: invokespecial #116                // Method gg/vape/module/render/NameTags."<init>":()V
+       124: aastore
+       125: aload_2
+       126: bipush        11
+       128: new           #118                // class gg/vape/module/render/Search
+       131: dup
+       132: invokespecial #119                // Method gg/vape/module/render/Search."<init>":()V
+       135: aastore
+       136: aload_2
+       137: bipush        12
+       139: new           #121                // class gg/vape/module/render/ESP
+       142: dup
+       143: invokespecial #122                // Method gg/vape/module/render/ESP."<init>":()V
+       146: aastore
+       147: aload_2
+       148: bipush        13
+       150: new           #124                // class gg/vape/module/world/ChestSteal
+       153: dup
+       154: invokespecial #125                // Method gg/vape/module/world/ChestSteal."<init>":()V
+       157: aastore
+       158: aload_2
+       159: bipush        14
+       161: new           #127                // class gg/vape/module/blatant/KeepSprint
+       164: dup
+       165: invokespecial #128                // Method gg/vape/module/blatant/KeepSprint."<init>":()V
+       168: aastore
+       169: aload_2
+       170: bipush        15
+       172: new           #130                // class gg/vape/module/world/FastPlace
+       175: dup
+       176: invokespecial #131                // Method gg/vape/module/world/FastPlace."<init>":()V
+       179: aastore
+       180: aload_2
+       181: bipush        16
+       183: new           #133                // class gg/vape/module/blatant/HitBoxes
+       186: dup
+       187: invokespecial #134                // Method gg/vape/module/blatant/HitBoxes."<init>":()V
+       190: aastore
+       191: aload_2
+       192: bipush        17
+       194: new           #136                // class gg/vape/module/render/SpawnerFinder
+       197: dup
+       198: invokespecial #137                // Method gg/vape/module/render/SpawnerFinder."<init>":()V
+       201: aastore
+       202: aload_2
+       203: bipush        18
+       205: new           #139                // class gg/vape/module/render/StorageESP
+       208: dup
+       209: invokespecial #140                // Method gg/vape/module/render/StorageESP."<init>":()V
+       212: aastore
+       213: aload_2
+       214: bipush        19
+       216: new           #142                // class gg/vape/module/blatant/Scaffold
+       219: dup
+       220: invokespecial #143                // Method gg/vape/module/blatant/Scaffold."<init>":()V
+       223: aastore
+       224: aload_2
+       225: bipush        20
+       227: new           #145                // class gg/vape/module/render/Fullbright
+       230: dup
+       231: invokespecial #146                // Method gg/vape/module/render/Fullbright."<init>":()V
+       234: aastore
+       235: aload_2
+       236: bipush        21
+       238: new           #148                // class gg/vape/module/combat/WTap
+       241: dup
+       242: invokespecial #149                // Method gg/vape/module/combat/WTap."<init>":()V
+       245: aastore
+       246: aload_2
+       247: bipush        22
+       249: new           #151                // class gg/vape/module/utility/AutoArmor
+       252: dup
+       253: invokespecial #152                // Method gg/vape/module/utility/AutoArmor."<init>":()V
+       256: aastore
+       257: aload_2
+       258: bipush        23
+       260: new           #154                // class gg/vape/module/utility/InvCleaner
+       263: dup
+       264: invokespecial #155                // Method gg/vape/module/utility/InvCleaner."<init>":()V
+       267: aastore
+       268: aload_2
+       269: bipush        24
+       271: new           #157                // class gg/vape/module/utility/ThrowDebuff
+       274: dup
+       275: invokespecial #158                // Method gg/vape/module/utility/ThrowDebuff."<init>":()V
+       278: aastore
+       279: aload_2
+       280: bipush        25
+       282: new           #160                // class gg/vape/module/utility/AutoTool
+       285: dup
+       286: invokespecial #161                // Method gg/vape/module/utility/AutoTool."<init>":()V
+       289: aastore
+       290: aload_2
+       291: bipush        26
+       293: new           #163                // class gg/vape/module/combat/AimAssist
+       296: dup
+       297: invokespecial #164                // Method gg/vape/module/combat/AimAssist."<init>":()V
+       300: aastore
+       301: aload_2
+       302: bipush        27
+       304: new           #166                // class gg/vape/module/render/Trajectories
+       307: dup
+       308: invokespecial #167                // Method gg/vape/module/render/Trajectories."<init>":()V
+       311: aastore
+       312: aload_2
+       313: bipush        28
+       315: new           #169                // class gg/vape/module/render/AntiDebuff
+       318: dup
+       319: invokespecial #170                // Method gg/vape/module/render/AntiDebuff."<init>":()V
+       322: aastore
+       323: aload_2
+       324: bipush        29
+       326: new           #172                // class gg/vape/module/blatant/SafeWalk
+       329: dup
+       330: invokespecial #173                // Method gg/vape/module/blatant/SafeWalk."<init>":()V
+       333: aastore
+       334: aload_2
+       335: bipush        30
+       337: new           #175                // class gg/vape/module/render/proj/Projectiles
+       340: dup
+       341: invokespecial #176                // Method gg/vape/module/render/proj/Projectiles."<init>":()V
+       344: aastore
+       345: aload_2
+       346: bipush        31
+       348: new           #178                // class gg/vape/module/blatant/Fly
+       351: dup
+       352: invokespecial #179                // Method gg/vape/module/blatant/Fly."<init>":()V
+       355: aastore
+       356: aload_2
+       357: bipush        32
+       359: new           #181                // class gg/vape/module/blatant/KillAura
+       362: dup
+       363: invokespecial #182                // Method gg/vape/module/blatant/KillAura."<init>":()V
+       366: aastore
+       367: aload_2
+       368: bipush        33
+       370: new           #184                // class gg/vape/module/render/Arrows
+       373: dup
+       374: invokespecial #185                // Method gg/vape/module/render/Arrows."<init>":()V
+       377: aastore
+       378: aload_2
+       379: bipush        34
+       381: new           #187                // class gg/vape/module/blatant/Blink
+       384: dup
+       385: invokespecial #188                // Method gg/vape/module/blatant/Blink."<init>":()V
+       388: aastore
+       389: aload_2
+       390: bipush        35
+       392: new           #190                // class gg/vape/module/utility/AutoPearl
+       395: dup
+       396: invokespecial #191                // Method gg/vape/module/utility/AutoPearl."<init>":()V
+       399: aastore
+       400: aload_2
+       401: bipush        36
+       403: new           #193                // class gg/vape/module/utility/Panic
+       406: dup
+       407: invokespecial #194                // Method gg/vape/module/utility/Panic."<init>":()V
+       410: aastore
+       411: aload_2
+       412: bipush        37
+       414: new           #196                // class gg/vape/module/world/AntiAFK
+       417: dup
+       418: invokespecial #197                // Method gg/vape/module/world/AntiAFK."<init>":()V
+       421: aastore
+       422: aload_2
+       423: bipush        38
+       425: new           #199                // class gg/vape/module/utility/ArmorSwitch
+       428: dup
+       429: invokespecial #200                // Method gg/vape/module/utility/ArmorSwitch."<init>":()V
+       432: aastore
+       433: aload_2
+       434: bipush        39
+       436: new           #202                // class gg/vape/module/render/ItemESP
+       439: dup
+       440: invokespecial #203                // Method gg/vape/module/render/ItemESP."<init>":()V
+       443: aastore
+       444: aload_2
+       445: bipush        40
+       447: new           #205                // class gg/vape/module/utility/MLG
+       450: dup
+       451: invokespecial #206                // Method gg/vape/module/utility/MLG."<init>":()V
+       454: aastore
+       455: aload_2
+       456: bipush        41
+       458: new           #208                // class gg/vape/module/utility/AutoHotbar
+       461: dup
+       462: invokespecial #209                // Method gg/vape/module/utility/AutoHotbar."<init>":()V
+       465: aastore
+       466: aload_2
+       467: bipush        42
+       469: new           #211                // class gg/vape/module/blatant/AutoHeal
+       472: dup
+       473: invokespecial #212                // Method gg/vape/module/blatant/AutoHeal."<init>":()V
+       476: aastore
+       477: aload_2
+       478: bipush        43
+       480: new           #214                // class gg/vape/module/render/PropHunt
+       483: dup
+       484: invokespecial #215                // Method gg/vape/module/render/PropHunt."<init>":()V
+       487: aastore
+       488: aload_2
+       489: bipush        44
+       491: new           #217                // class gg/vape/module/utility/Parkour
+       494: dup
+       495: invokespecial #218                // Method gg/vape/module/utility/Parkour."<init>":()V
+       498: aastore
+       499: aload_2
+       500: bipush        45
+       502: new           #220                // class gg/vape/module/world/MurderFinder
+       505: dup
+       506: invokespecial #221                // Method gg/vape/module/world/MurderFinder."<init>":()V
+       509: aastore
+       510: aload_2
+       511: bipush        46
+       513: new           #223                // class gg/vape/module/combat/BowAimbot
+       516: dup
+       517: invokespecial #224                // Method gg/vape/module/combat/BowAimbot."<init>":()V
+       520: aastore
+       521: aload_2
+       522: bipush        47
+       524: new           #226                // class gg/vape/module/render/Indicators
+       527: dup
+       528: invokespecial #227                // Method gg/vape/module/render/Indicators."<init>":()V
+       531: aastore
+       532: aload_2
+       533: bipush        48
+       535: new           #229                // class gg/vape/module/combat/Sprint
+       538: dup
+       539: invokespecial #230                // Method gg/vape/module/combat/Sprint."<init>":()V
+       542: aastore
+       543: aload_2
+       544: bipush        49
+       546: new           #232                // class gg/vape/module/render/Health
+       549: dup
+       550: invokespecial #233                // Method gg/vape/module/render/Health."<init>":()V
+       553: aastore
+       554: aload_2
+       555: bipush        50
+       557: new           #235                // class gg/vape/module/combat/HitSelect
+       560: dup
+       561: invokespecial #236                // Method gg/vape/module/combat/HitSelect."<init>":()V
+       564: aastore
+       565: aload_2
+       566: bipush        51
+       568: new           #238                // class gg/vape/module/combat/BlockHit
+       571: dup
+       572: invokespecial #239                // Method gg/vape/module/combat/BlockHit."<init>":()V
+       575: aastore
+       576: new           #241                // class gg/vape/module/combat/SilentAura
+       579: dup
+       580: invokespecial #242                // Method gg/vape/module/combat/SilentAura."<init>":()V
+       583: astore_3
+       584: aload_2
+       585: bipush        52
+       587: aload_3
+       588: aastore
+       589: aload_2
+       590: bipush        53
+       592: new           #244                // class gg/vape/module/combat/silentaura/SilentAuraClicker
+       595: dup
+       596: aload_3
+       597: invokespecial #247                // Method gg/vape/module/combat/silentaura/SilentAuraClicker."<init>":(Lgg/vape/module/combat/SilentAura;)V
+       600: aastore
+       601: aload_2
+       602: bipush        54
+       604: new           #249                // class gg/vape/module/combat/HitFlick
+       607: dup
+       608: invokespecial #250                // Method gg/vape/module/combat/HitFlick."<init>":()V
+       611: aastore
+       612: aload_2
+       613: bipush        55
+       615: new           #252                // class gg/vape/module/utility/BlockIn
+       618: dup
+       619: invokespecial #253                // Method gg/vape/module/utility/BlockIn."<init>":()V
+       622: aastore
+       623: aload_2
+       624: bipush        56
+       626: new           #255                // class gg/vape/module/utility/InventoryManager
+       629: dup
+       630: invokespecial #256                // Method gg/vape/module/utility/InventoryManager."<init>":()V
+       633: aastore
+       634: aload_2
+       635: bipush        57
+       637: new           #258                // class gg/vape/module/combat/NoItemRelease
+       640: dup
+       641: invokespecial #259                // Method gg/vape/module/combat/NoItemRelease."<init>":()V
+       644: aastore
+       645: aload_2
+       646: bipush        58
+       648: new           #261                // class gg/vape/module/blatant/Timer
+       651: dup
+       652: invokespecial #262                // Method gg/vape/module/blatant/Timer."<init>":()V
+       655: aastore
+       656: aload_2
+       657: bipush        59
+       659: new           #264                // class gg/vape/module/utility/InventoryFill
+       662: dup
+       663: invokespecial #265                // Method gg/vape/module/utility/InventoryFill."<init>":()V
+       666: aastore
+       667: aload_2
+       668: bipush        60
+       670: new           #267                // class gg/vape/module/render/BedPlates
+       673: dup
+       674: invokespecial #268                // Method gg/vape/module/render/BedPlates."<init>":()V
+       677: aastore
+       678: aload_0
+       679: aload_2
+       680: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       683: invokespecial #278                // Method registerModules:(Ljava/util/stream/Stream;)V
+       686: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+       689: new           #286                // class gg/vape/module/render/Explosions
+       692: dup
+       693: invokespecial #287                // Method gg/vape/module/render/Explosions."<init>":()V
+       696: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+       699: getstatic     #297                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_16_5:Lgg/vape/wrapper/impl/ForgeVersion;
+       702: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+       705: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+       708: aload_0
+       709: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+       712: iconst_2
+       713: anewarray     #65                 // class gg/vape/module/Mod
+       716: astore        4
+       718: aload         4
+       720: iconst_0
+       721: new           #311                // class gg/vape/module/render/Chams
+       724: dup
+       725: invokespecial #312                // Method gg/vape/module/render/Chams."<init>":()V
+       728: aastore
+       729: new           #314                // class gg/vape/module/world/XRay
+       732: dup
+       733: invokespecial #315                // Method gg/vape/module/world/XRay."<init>":()V
+       736: astore        5
+       738: aload_0
+       739: astore        6
+       741: aload         6
+       743: aload         5
+       745: putfield      #317                // Field xrayModule:Lgg/vape/module/world/XRay;
+       748: aload         4
+       750: iconst_1
+       751: aload         5
+       753: aastore
+       754: aload_0
+       755: aload         4
+       757: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       760: invokedynamic #336,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+       765: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       768: aload_1
+       769: astore        7
+       771: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+       774: new           #341                // class gg/vape/module/render/Freecam
+       777: dup
+       778: invokespecial #342                // Method gg/vape/module/render/Freecam."<init>":()V
+       781: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+       784: getstatic     #297                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_16_5:Lgg/vape/wrapper/impl/ForgeVersion;
+       787: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+       790: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+       793: getstatic     #345                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_21_11:Lgg/vape/wrapper/impl/ForgeVersion;
+       796: invokevirtual #348                // Method gg/vape/wrapper/impl/ForgeVersion.n:()Lgg/vape/module/MinecraftVersionConstraint;
+       799: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+       802: aload_0
+       803: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+       806: aload_0
+       807: new           #350                // class gg/vape/module/blatant/InvWalk
+       810: dup
+       811: invokespecial #351                // Method gg/vape/module/blatant/InvWalk."<init>":()V
+       814: invokestatic  #354                // InterfaceMethod java/util/stream/Stream.of:(Ljava/lang/Object;)Ljava/util/stream/Stream;
+       817: invokedynamic #359,  0            // InvokeDynamic #1:accept:()Ljava/util/function/Consumer;
+       822: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       825: aload_0
+       826: new           #361                // class gg/vape/module/blatant/Backtrack
+       829: dup
+       830: invokespecial #362                // Method gg/vape/module/blatant/Backtrack."<init>":()V
+       833: invokestatic  #354                // InterfaceMethod java/util/stream/Stream.of:(Ljava/lang/Object;)Ljava/util/stream/Stream;
+       836: invokedynamic #367,  0            // InvokeDynamic #2:accept:()Ljava/util/function/Consumer;
+       841: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       844: aload_0
+       845: iconst_4
+       846: anewarray     #65                 // class gg/vape/module/Mod
+       849: dup
+       850: iconst_0
+       851: new           #369                // class gg/vape/module/utility/AutoFish
+       854: dup
+       855: invokespecial #370                // Method gg/vape/module/utility/AutoFish."<init>":()V
+       858: aastore
+       859: dup
+       860: iconst_1
+       861: new           #372                // class gg/vape/module/world/BedBreaker
+       864: dup
+       865: invokespecial #373                // Method gg/vape/module/world/BedBreaker."<init>":()V
+       868: aastore
+       869: dup
+       870: iconst_2
+       871: new           #375                // class gg/vape/module/blatant/Clutch
+       874: dup
+       875: invokespecial #376                // Method gg/vape/module/blatant/Clutch."<init>":()V
+       878: aastore
+       879: dup
+       880: iconst_3
+       881: new           #378                // class gg/vape/module/world/FakeLag
+       884: dup
+       885: invokespecial #379                // Method gg/vape/module/world/FakeLag."<init>":()V
+       888: aastore
+       889: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       892: invokedynamic #384,  0            // InvokeDynamic #3:accept:()Ljava/util/function/Consumer;
+       897: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       900: aload_0
+       901: new           #267                // class gg/vape/module/render/BedPlates
+       904: dup
+       905: invokespecial #268                // Method gg/vape/module/render/BedPlates."<init>":()V
+       908: invokestatic  #354                // InterfaceMethod java/util/stream/Stream.of:(Ljava/lang/Object;)Ljava/util/stream/Stream;
+       911: invokedynamic #389,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+       916: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       919: aload_0
+       920: new           #391                // class gg/vape/module/blatant/AntiBot
+       923: dup
+       924: invokespecial #392                // Method gg/vape/module/blatant/AntiBot."<init>":()V
+       927: invokestatic  #354                // InterfaceMethod java/util/stream/Stream.of:(Ljava/lang/Object;)Ljava/util/stream/Stream;
+       930: invokespecial #278                // Method registerModules:(Ljava/util/stream/Stream;)V
+       933: aload_0
+       934: bipush        9
+       936: anewarray     #65                 // class gg/vape/module/Mod
+       939: dup
+       940: iconst_0
+       941: new           #394                // class gg/vape/module/combat/Triggerbot
+       944: dup
+       945: invokespecial #395                // Method gg/vape/module/combat/Triggerbot."<init>":()V
+       948: aastore
+       949: dup
+       950: iconst_1
+       951: new           #397                // class gg/vape/module/combat/HitSwap
+       954: dup
+       955: invokespecial #398                // Method gg/vape/module/combat/HitSwap."<init>":()V
+       958: aastore
+       959: dup
+       960: iconst_2
+       961: new           #400                // class gg/vape/module/utility/AutoMace
+       964: dup
+       965: invokespecial #401                // Method gg/vape/module/utility/AutoMace."<init>":()V
+       968: aastore
+       969: dup
+       970: iconst_3
+       971: new           #403                // class gg/vape/module/blatant/AutoAnchor
+       974: dup
+       975: invokespecial #404                // Method gg/vape/module/blatant/AutoAnchor."<init>":()V
+       978: aastore
+       979: dup
+       980: iconst_4
+       981: new           #406                // class gg/vape/module/utility/WindCharge
+       984: dup
+       985: invokespecial #407                // Method gg/vape/module/utility/WindCharge."<init>":()V
+       988: aastore
+       989: dup
+       990: iconst_5
+       991: new           #409                // class gg/vape/module/combat/CrystalAura
+       994: dup
+       995: invokespecial #410                // Method gg/vape/module/combat/CrystalAura."<init>":()V
+       998: aastore
+       999: dup
+      1000: bipush        6
+      1002: new           #412                // class gg/vape/module/utility/AutoTotem
+      1005: dup
+      1006: invokespecial #413                // Method gg/vape/module/utility/AutoTotem."<init>":()V
+      1009: aastore
+      1010: dup
+      1011: bipush        7
+      1013: new           #415                // class gg/vape/module/combat/ShieldBreaker
+      1016: dup
+      1017: invokespecial #416                // Method gg/vape/module/combat/ShieldBreaker."<init>":()V
+      1020: aastore
+      1021: dup
+      1022: bipush        8
+      1024: new           #418                // class gg/vape/module/utility/PearlCatch
+      1027: dup
+      1028: invokespecial #419                // Method gg/vape/module/utility/PearlCatch."<init>":()V
+      1031: aastore
+      1032: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+      1035: invokedynamic #424,  0            // InvokeDynamic #5:accept:()Ljava/util/function/Consumer;
+      1040: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+      1043: aload_0
+      1044: iconst_5
+      1045: anewarray     #65                 // class gg/vape/module/Mod
+      1048: dup
+      1049: iconst_0
+      1050: new           #426                // class gg/vape/module/blatant/NoFall
+      1053: dup
+      1054: invokespecial #427                // Method gg/vape/module/blatant/NoFall."<init>":()V
+      1057: aastore
+      1058: dup
+      1059: iconst_1
+      1060: new           #429                // class gg/vape/module/blatant/NoSlowdown
+      1063: dup
+      1064: invokespecial #430                // Method gg/vape/module/blatant/NoSlowdown."<init>":()V
+      1067: aastore
+      1068: dup
+      1069: iconst_2
+      1070: new           #432                // class gg/vape/module/blatant/Speed
+      1073: dup
+      1074: invokespecial #433                // Method gg/vape/module/blatant/Speed."<init>":()V
+      1077: aastore
+      1078: dup
+      1079: iconst_3
+      1080: new           #258                // class gg/vape/module/combat/NoItemRelease
+      1083: dup
+      1084: invokespecial #259                // Method gg/vape/module/combat/NoItemRelease."<init>":()V
+      1087: aastore
+      1088: dup
+      1089: iconst_4
+      1090: new           #261                // class gg/vape/module/blatant/Timer
+      1093: dup
+      1094: invokespecial #262                // Method gg/vape/module/blatant/Timer."<init>":()V
+      1097: aastore
+      1098: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+      1101: invokedynamic #438,  0            // InvokeDynamic #6:accept:()Ljava/util/function/Consumer;
+      1106: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+      1109: aload_0
+      1110: invokespecial #441                // Method registerTextGuiSettings:()V
+      1113: aload_0
+      1114: invokespecial #444                // Method registerHudModules:()V
+      1117: aload         7
+      1119: ifnonnull     1129
+      1122: iconst_2
+      1123: anewarray     #446                // class gg/vape/ui/click/component/GuiComponent
+      1126: invokestatic  #450                // Method gg/vape/ui/click/component/GuiComponent.setLegacyComponentState:([Lgg/vape/ui/click/component/GuiComponent;)V
+      1129: return
+
+  public boolean getState(java.lang.Class<? extends gg.vape.module.Mod>);
+    Code:
+         0: aload_0
+         1: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+         4: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+         9: astore_2
+        10: aload_2
+        11: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        16: ifeq          48
+        19: aload_2
+        20: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        25: checkcast     #65                 // class gg/vape/module/Mod
+        28: astore_3
+        29: aload_3
+        30: invokevirtual #471                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        33: aload_1
+        34: invokevirtual #474                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        37: ifne          43
+        40: goto          10
+        43: aload_3
+        44: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        47: ireturn
+        48: iconst_0
+        49: ireturn
+
+  private static void addMinecraft1206Constraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #484                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_20_6:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  public com.google.gson.JsonObject getEnabledNonHudModuleStates();
+    Code:
+         0: new           #490                // class com/google/gson/JsonObject
+         3: dup
+         4: invokespecial #491                // Method com/google/gson/JsonObject."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: invokevirtual #47                 // Method getAllModules:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_2
+        18: aload_2
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          72
+        27: aload_2
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore_3
+        37: aload_3
+        38: instanceof    #493                // class gg/vape/module/render/hud/HudModule
+        41: ifne          18
+        44: aload_3
+        45: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        48: ifne          54
+        51: goto          18
+        54: aload_1
+        55: aload_3
+        56: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        59: aload_3
+        60: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        63: invokestatic  #503                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        66: invokevirtual #507                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Boolean;)V
+        69: goto          18
+        72: aload_1
+        73: areturn
+
+  public void applyProfileModuleStates(gg.vape.config.Profile);
+    Code:
+         0: aload_1
+         1: ifnonnull     5
+         4: return
+         5: aload_0
+         6: iconst_1
+         7: putfield      #515                // Field suppressStateNotifications:Z
+        10: aload_1
+        11: invokevirtual #520                // Method gg/vape/config/Profile.getEnabledModuleStates:()Lcom/google/gson/JsonObject;
+        14: astore_2
+        15: aload_2
+        16: ifnonnull     27
+        19: new           #490                // class com/google/gson/JsonObject
+        22: dup
+        23: invokespecial #491                // Method com/google/gson/JsonObject."<init>":()V
+        26: astore_2
+        27: iconst_0
+        28: istore_3
+        29: aload_0
+        30: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+        33: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        38: astore        4
+        40: aload         4
+        42: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        47: ifeq          227
+        50: aload         4
+        52: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        57: checkcast     #65                 // class gg/vape/module/Mod
+        60: astore        5
+        62: aload         5
+        64: ifnull        40
+        67: aload         5
+        69: instanceof    #493                // class gg/vape/module/render/hud/HudModule
+        72: ifne          40
+        75: aload         5
+        77: invokevirtual #524                // Method gg/vape/module/Mod.getCategory:()Lgg/vape/module/Category;
+        80: getstatic     #528                // Field gg/vape/module/Category.NONE:Lgg/vape/module/Category;
+        83: invokevirtual #474                // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        86: ifeq          92
+        89: goto          40
+        92: aload_2
+        93: aload         5
+        95: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        98: invokevirtual #532                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+       101: ifeq          172
+       104: aload         5
+       106: invokevirtual #535                // Method gg/vape/module/Mod.isVisible:()Z
+       109: ifne          115
+       112: goto          40
+       115: aload         5
+       117: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+       120: ifeq          126
+       123: goto          40
+       126: aload_2
+       127: aload         5
+       129: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+       132: invokestatic  #541                // Method gg/vape/config/ConfigJsonUtils.getBoolean:(Lcom/google/gson/JsonObject;Ljava/lang/String;)Ljava/lang/Boolean;
+       135: astore        6
+       137: aload         6
+       139: ifnull        159
+       142: aload         6
+       144: invokevirtual #544                // Method java/lang/Boolean.booleanValue:()Z
+       147: ifeq          159
+       150: aload         5
+       152: iconst_1
+       153: invokevirtual #548                // Method gg/vape/module/Mod.setEnabled:(Z)V
+       156: iinc          3, 1
+       159: goto          169
+       162: astore        6
+       164: aload         6
+       166: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       169: goto          40
+       172: aload         5
+       174: instanceof    #85                 // class gg/vape/module/none/ClientSettings
+       177: ifne          196
+       180: aload         5
+       182: invokevirtual #558                // Method gg/vape/module/Mod.getGuiColor:()I
+       185: ifeq          196
+       188: aload         5
+       190: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+       193: ifne          199
+       196: goto          40
+       199: aload         5
+       201: invokevirtual #561                // Method gg/vape/module/Mod.toggle:()V
+       204: goto          214
+       207: astore        6
+       209: aload         6
+       211: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       214: goto          224
+       217: astore        6
+       219: aload         6
+       221: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       224: goto          40
+       227: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+       230: invokevirtual #569                // Method gg/vape/Vape.getPublicProfileSettings:()Lgg/vape/config/PublicProfileSettings;
+       233: ifnull        352
+       236: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+       239: invokevirtual #569                // Method gg/vape/Vape.getPublicProfileSettings:()Lgg/vape/config/PublicProfileSettings;
+       242: getfield      #575                // Field gg/vape/config/PublicProfileSettings.profileSwitchNotifications:Lgg/vape/value/BooleanValue;
+       245: invokevirtual #581                // Method gg/vape/value/BooleanValue.getEffectiveValue:()Ljava/lang/Boolean;
+       248: invokevirtual #544                // Method java/lang/Boolean.booleanValue:()Z
+       251: ifeq          352
+       254: aload_0
+       255: getfield      #583                // Field profileSwitchNotification:Lgg/vape/notification/ReusableTextNotification;
+       258: ifnull        352
+       261: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+       264: invokevirtual #587                // Method gg/vape/Vape.getNotificationManager:()Lgg/vape/notification/NotificationManager;
+       267: ifnull        352
+       270: aload_0
+       271: getfield      #583                // Field profileSwitchNotification:Lgg/vape/notification/ReusableTextNotification;
+       274: new           #589                // class java/lang/StringBuilder
+       277: dup
+       278: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       281: ldc_w         #592                // String Profile swap to
+       284: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       287: getstatic     #602                // Field gg/vape/config/ClientSettings.FORMAT_CODE:Ljava/lang/String;
+       290: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       293: ldc_w         #604                // String 6
+       296: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       299: aload_1
+       300: invokevirtual #605                // Method gg/vape/config/Profile.getName:()Ljava/lang/String;
+       303: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       306: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       309: invokevirtual #614                // Method gg/vape/notification/ReusableTextNotification.withTitle:(Ljava/lang/String;)Lgg/vape/notification/ReusableTextNotification;
+       312: new           #589                // class java/lang/StringBuilder
+       315: dup
+       316: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       319: iload_3
+       320: invokevirtual #617                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       323: ldc_w         #619                // String  modules enabled
+       326: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       329: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       332: invokevirtual #622                // Method gg/vape/notification/ReusableTextNotification.withMessage:(Ljava/lang/String;)Lgg/vape/notification/ReusableTextNotification;
+       335: invokevirtual #626                // Method gg/vape/notification/ReusableTextNotification.reset:()Lgg/vape/notification/ReusableTextNotification;
+       338: pop
+       339: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+       342: invokevirtual #587                // Method gg/vape/Vape.getNotificationManager:()Lgg/vape/notification/NotificationManager;
+       345: aload_0
+       346: getfield      #583                // Field profileSwitchNotification:Lgg/vape/notification/ReusableTextNotification;
+       349: invokevirtual #632                // Method gg/vape/notification/NotificationManager.show:(Lgg/vape/notification/INotification;)V
+       352: aload_0
+       353: iconst_0
+       354: putfield      #515                // Field suppressStateNotifications:Z
+       357: goto          370
+       360: astore        7
+       362: aload_0
+       363: iconst_0
+       364: putfield      #515                // Field suppressStateNotifications:Z
+       367: aload         7
+       369: athrow
+       370: return
+      Exception table:
+         from    to  target type
+           115   123   162   Class java/lang/Throwable
+           126   159   162   Class java/lang/Throwable
+           199   204   207   Class java/lang/Throwable
+            92   112   217   Class java/lang/Throwable
+           115   123   217   Class java/lang/Throwable
+           126   169   217   Class java/lang/Throwable
+           172   196   217   Class java/lang/Throwable
+           199   214   217   Class java/lang/Throwable
+            10   352   360   any
+           360   362   360   any
+
+  private static void addModernMinecraftConstraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #643                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_21_4:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  public void initializeAllModules();
+    Code:
+         0: aload_0
+         1: getfield      #646                // Field allModulesByType:Ljava/util/Map;
+         4: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_1
+        15: aload_1
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          41
+        24: aload_1
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #65                 // class gg/vape/module/Mod
+        33: astore_2
+        34: aload_2
+        35: invokevirtual #651                // Method gg/vape/module/Mod.I:()V
+        38: goto          15
+        41: return
+
+  private void registerModules(java.util.stream.Stream<gg.vape.module.Mod>, java.util.function.Consumer<gg.vape.manager.ModRegistrationBuilder<?>>);
+    Code:
+         0: aload_1
+         1: aload_0
+         2: aload_2
+         3: invokedynamic #662,  0            // InvokeDynamic #7:accept:(Lgg/vape/manager/ModManager;Ljava/util/function/Consumer;)Ljava/util/function/Consumer;
+         8: invokeinterface #666,  2          // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+        13: return
+
+  public java.util.HashSet<gg.vape.module.Mod> getMods();
+    Code:
+         0: aload_0
+         1: getfield      #677                // Field enabledModules:Ljava/util/HashSet;
+         4: areturn
+
+  public static void setLegacyCategoryComponents(gg.vape.ui.click.component.GuiComponent[]);
+    Code:
+         0: aload_0
+         1: putstatic     #680                // Field legacyCategoryComponents:[Lgg/vape/ui/click/component/GuiComponent;
+         4: return
+
+  private void registerModules(java.util.stream.Stream<gg.vape.module.Mod>);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #687,  0            // InvokeDynamic #8:accept:()Ljava/util/function/Consumer;
+         7: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+        10: return
+
+  void registerModule(gg.vape.module.Mod, java.util.List<java.util.List<gg.vape.module.MinecraftVersionConstraint>>, boolean);
+    Code:
+         0: aload_0
+         1: getfield      #646                // Field allModulesByType:Ljava/util/Map;
+         4: aload_1
+         5: invokevirtual #471                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+         8: aload_1
+         9: invokeinterface #694,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        14: pop
+        15: aload_2
+        16: invokeinterface #699,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+        21: ifne          89
+        24: iconst_0
+        25: istore        4
+        27: aload_2
+        28: invokeinterface #700,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        33: astore        5
+        35: aload         5
+        37: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        42: ifeq          83
+        45: aload         5
+        47: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        52: checkcast     #696                // class java/util/List
+        55: astore        6
+        57: aload         6
+        59: invokestatic  #706                // Method gg/vape/module/MinecraftVersionConstraint.o:(Ljava/util/List;)Ljava/util/List;
+        62: astore        7
+        64: aload         7
+        66: invokeinterface #699,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+        71: ifne          77
+        74: goto          35
+        77: iconst_1
+        78: istore        4
+        80: goto          35
+        83: iload         4
+        85: ifne          89
+        88: return
+        89: aload_0
+        90: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+        93: aload_1
+        94: invokevirtual #471                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        97: aload_1
+        98: invokeinterface #694,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       103: pop
+       104: aload_0
+       105: getfield      #710                // Field activeModuleList:Ljava/util/ArrayList;
+       108: aload_1
+       109: invokevirtual #71                 // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       112: pop
+       113: aload_1
+       114: invokevirtual #714                // Method gg/vape/module/Mod.getValues:()Ljava/util/List;
+       117: invokeinterface #700,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       122: astore        4
+       124: aload         4
+       126: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       131: ifeq          257
+       134: aload         4
+       136: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       141: checkcast     #716                // class gg/vape/value/Value
+       144: astore        5
+       146: aload         5
+       148: instanceof    #718                // class gg/vape/value/ModeValue
+       151: ifne          157
+       154: goto          124
+       157: aload         5
+       159: checkcast     #718                // class gg/vape/value/ModeValue
+       162: astore        6
+       164: aload         6
+       166: invokevirtual #722                // Method gg/vape/value/ModeValue.getModes:()[Lgg/vape/unmap/ModeSelection;
+       169: astore        7
+       171: aload         7
+       173: arraylength
+       174: istore        8
+       176: iconst_0
+       177: istore        9
+       179: iload         9
+       181: iload         8
+       183: if_icmpge     254
+       186: aload         7
+       188: iload         9
+       190: aaload
+       191: astore        10
+       193: aload         10
+       195: instanceof    #726                // class gg/vape/value/SubModuleValue
+       198: ifeq          248
+       201: aload         10
+       203: checkcast     #726                // class gg/vape/value/SubModuleValue
+       206: dup
+       207: astore        11
+       209: invokevirtual #730                // Method gg/vape/value/SubModuleValue.getInstance:()Lgg/vape/module/SubModule;
+       212: invokevirtual #733                // Method gg/vape/module/SubModule.isSubModuleEnabled:()Z
+       215: ifne          221
+       218: goto          248
+       221: aload_0
+       222: aload         11
+       224: invokevirtual #730                // Method gg/vape/value/SubModuleValue.getInstance:()Lgg/vape/module/SubModule;
+       227: aload_2
+       228: iconst_0
+       229: invokevirtual #737                // Method registerModule:(Lgg/vape/module/Mod;Ljava/util/List;Z)V
+       232: aload_1
+       233: iconst_1
+       234: anewarray     #67                 // class gg/vape/module/SubModule
+       237: dup
+       238: iconst_0
+       239: aload         11
+       241: invokevirtual #730                // Method gg/vape/value/SubModuleValue.getInstance:()Lgg/vape/module/SubModule;
+       244: aastore
+       245: invokevirtual #741                // Method gg/vape/module/Mod.registerSubModule:([Lgg/vape/module/SubModule;)V
+       248: iinc          9, 1
+       251: goto          179
+       254: goto          124
+       257: iload_3
+       258: ifeq          266
+       261: aload_1
+       262: iconst_1
+       263: invokevirtual #548                // Method gg/vape/module/Mod.setEnabled:(Z)V
+       266: return
+
+  private void registerTextGuiSettings();
+    Code:
+         0: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+         3: new           #761                // class gg/vape/module/none/TextGuiSettings
+         6: dup
+         7: invokespecial #762                // Method gg/vape/module/none/TextGuiSettings."<init>":()V
+        10: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+        13: aload_0
+        14: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+        17: return
+
+  private void registerModuleWithCustomizer(java.util.function.Consumer, gg.vape.module.Mod);
+    Code:
+         0: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+         3: aload_2
+         4: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+         7: astore_3
+         8: aload_1
+         9: aload_3
+        10: invokeinterface #767,  2          // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+        15: aload_3
+        16: aload_0
+        17: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+        20: return
+
+  public void finishModuleInitialization();
+    Code:
+         0: aload_0
+         1: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         4: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_1
+        15: aload_1
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          41
+        24: aload_1
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #65                 // class gg/vape/module/Mod
+        33: astore_2
+        34: aload_2
+        35: invokevirtual #774                // Method gg/vape/module/Mod.onFinishModuleInitialization:()V
+        38: goto          15
+        41: getstatic     #777                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_8_9:Lgg/vape/wrapper/impl/ForgeVersion;
+        44: invokevirtual #780                // Method gg/vape/wrapper/impl/ForgeVersion.L:()Z
+        47: ifeq          117
+        50: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+        53: invokevirtual #783                // Method gg/vape/Vape.isOnlineConnected:()Z
+        56: ifeq          87
+        59: aload_0
+        60: ldc_w         #785                // class gg/vape/module/render/hud/NoClickDelayHudModule
+        63: invokevirtual #789                // Method getMod:(Ljava/lang/Class;)Lgg/vape/module/Mod;
+        66: checkcast     #785                // class gg/vape/module/render/hud/NoClickDelayHudModule
+        69: iconst_1
+        70: invokevirtual #790                // Method gg/vape/module/render/hud/NoClickDelayHudModule.setEnabled:(Z)V
+        73: aload_0
+        74: ldc_w         #792                // class gg/vape/module/none/MouseDelayFix
+        77: invokevirtual #789                // Method getMod:(Ljava/lang/Class;)Lgg/vape/module/Mod;
+        80: checkcast     #792                // class gg/vape/module/none/MouseDelayFix
+        83: iconst_1
+        84: invokevirtual #793                // Method gg/vape/module/none/MouseDelayFix.setEnabled:(Z)V
+        87: aload_0
+        88: ldc_w         #792                // class gg/vape/module/none/MouseDelayFix
+        91: invokevirtual #789                // Method getMod:(Ljava/lang/Class;)Lgg/vape/module/Mod;
+        94: checkcast     #792                // class gg/vape/module/none/MouseDelayFix
+        97: invokevirtual #794                // Method gg/vape/module/none/MouseDelayFix.isEnabled:()Z
+       100: ifne          117
+       103: aload_0
+       104: ldc_w         #792                // class gg/vape/module/none/MouseDelayFix
+       107: invokevirtual #789                // Method getMod:(Ljava/lang/Class;)Lgg/vape/module/Mod;
+       110: checkcast     #792                // class gg/vape/module/none/MouseDelayFix
+       113: iconst_1
+       114: invokevirtual #793                // Method gg/vape/module/none/MouseDelayFix.setEnabled:(Z)V
+       117: return
+
+  public java.lang.String buildTranslationTemplate();
+    Code:
+         0: new           #589                // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_2
+        18: aload_2
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          396
+        27: aload_2
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore_3
+        37: aload_3
+        38: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        41: astore        4
+        43: aload         4
+        45: ldc_w         #797                // String
+        48: ldc_w         #799                // String _
+        51: invokevirtual #805                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+        54: invokevirtual #808                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+        57: astore        5
+        59: aload_1
+        60: new           #589                // class java/lang/StringBuilder
+        63: dup
+        64: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+        67: aload         5
+        69: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        72: ldc_w         #810                // String =
+        75: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        78: aload         4
+        80: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        83: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        86: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        89: pop
+        90: aload_1
+        91: ldc_w         #812                // String \n
+        94: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        97: pop
+        98: aload_3
+        99: invokevirtual #815                // Method gg/vape/module/Mod.getToolTip:()Ljava/lang/String;
+       102: ifnull        168
+       105: aload_3
+       106: invokevirtual #815                // Method gg/vape/module/Mod.getToolTip:()Ljava/lang/String;
+       109: ldc_w         #817                // String
+       112: invokevirtual #818                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       115: ifne          168
+       118: aload_1
+       119: new           #589                // class java/lang/StringBuilder
+       122: dup
+       123: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       126: aload         5
+       128: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       131: ldc_w         #820                // String .tooltip=
+       134: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       137: aload_3
+       138: invokevirtual #815                // Method gg/vape/module/Mod.getToolTip:()Ljava/lang/String;
+       141: ldc_w         #812                // String \n
+       144: ldc_w         #797                // String
+       147: invokevirtual #805                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+       150: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       153: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       156: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       159: pop
+       160: aload_1
+       161: ldc_w         #812                // String \n
+       164: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       167: pop
+       168: aload_3
+       169: invokevirtual #714                // Method gg/vape/module/Mod.getValues:()Ljava/util/List;
+       172: invokeinterface #700,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+       177: astore        6
+       179: aload         6
+       181: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       186: ifeq          393
+       189: aload         6
+       191: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       196: checkcast     #716                // class gg/vape/value/Value
+       199: astore        7
+       201: aload         7
+       203: invokevirtual #821                // Method gg/vape/value/Value.getName:()Ljava/lang/String;
+       206: astore        8
+       208: new           #589                // class java/lang/StringBuilder
+       211: dup
+       212: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       215: aload         5
+       217: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       220: ldc_w         #823                // String .
+       223: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       226: aload         7
+       228: invokevirtual #821                // Method gg/vape/value/Value.getName:()Ljava/lang/String;
+       231: ldc_w         #797                // String
+       234: ldc_w         #799                // String _
+       237: invokevirtual #805                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+       240: invokevirtual #808                // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+       243: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       246: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       249: astore        9
+       251: aload_1
+       252: new           #589                // class java/lang/StringBuilder
+       255: dup
+       256: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       259: aload         9
+       261: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       264: ldc_w         #810                // String =
+       267: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       270: aload         8
+       272: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       275: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       278: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       281: pop
+       282: aload_1
+       283: ldc_w         #812                // String \n
+       286: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       289: pop
+       290: aload         7
+       292: invokevirtual #826                // Method gg/vape/value/Value.getDescription:()Ljava/lang/String;
+       295: ifnull        179
+       298: aload         7
+       300: invokevirtual #826                // Method gg/vape/value/Value.getDescription:()Ljava/lang/String;
+       303: invokevirtual #827                // Method java/lang/String.isEmpty:()Z
+       306: ifeq          312
+       309: goto          179
+       312: aload         7
+       314: invokevirtual #826                // Method gg/vape/value/Value.getDescription:()Ljava/lang/String;
+       317: ldc_w         #812                // String \n
+       320: ldc_w         #797                // String
+       323: invokevirtual #805                // Method java/lang/String.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+       326: astore        10
+       328: new           #589                // class java/lang/StringBuilder
+       331: dup
+       332: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       335: aload         9
+       337: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       340: ldc_w         #829                // String .tooltip
+       343: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       346: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       349: astore        11
+       351: aload_1
+       352: new           #589                // class java/lang/StringBuilder
+       355: dup
+       356: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       359: aload         11
+       361: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       364: ldc_w         #810                // String =
+       367: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       370: aload         10
+       372: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       375: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       378: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       381: pop
+       382: aload_1
+       383: ldc_w         #812                // String \n
+       386: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       389: pop
+       390: goto          179
+       393: goto          18
+       396: aload_1
+       397: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       400: areturn
+
+  private static java.lang.Exception propagateException(java.lang.Exception);
+    Code:
+         0: aload_0
+         1: areturn
+
+  public void onModuleStateChanged(gg.vape.event.impl.EventModStateChange);
+    Code:
+         0: aload_1
+         1: invokevirtual #850                // Method gg/vape/event/impl/EventModStateChange.getModule:()Lgg/vape/module/Mod;
+         4: astore_2
+         5: aload_2
+         6: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+         9: ifeq          24
+        12: aload_0
+        13: getfield      #677                // Field enabledModules:Ljava/util/HashSet;
+        16: aload_2
+        17: invokevirtual #853                // Method java/util/HashSet.add:(Ljava/lang/Object;)Z
+        20: pop
+        21: goto          33
+        24: aload_0
+        25: getfield      #677                // Field enabledModules:Ljava/util/HashSet;
+        28: aload_2
+        29: invokevirtual #856                // Method java/util/HashSet.remove:(Ljava/lang/Object;)Z
+        32: pop
+        33: aload_0
+        34: invokevirtual #858                // Method getMods:()Ljava/util/HashSet;
+        37: invokevirtual #859                // Method java/util/HashSet.iterator:()Ljava/util/Iterator;
+        40: astore_3
+        41: aload_3
+        42: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        47: ifeq          70
+        50: aload_3
+        51: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        56: checkcast     #65                 // class gg/vape/module/Mod
+        59: astore        4
+        61: aload         4
+        63: aload_2
+        64: invokevirtual #862                // Method gg/vape/module/Mod.U:(Lgg/vape/module/Mod;)V
+        67: goto          41
+        70: getstatic     #865                // Field gg/vape/module/none/ClientSettings.INSTANCE:Lgg/vape/module/none/ClientSettings;
+        73: invokevirtual #868                // Method gg/vape/module/none/ClientSettings.isInputEnabled:()Z
+        76: ifeq          115
+        79: aload_2
+        80: invokevirtual #871                // Method gg/vape/module/Mod.q$src$Z$12h8h4c:()Z
+        83: ifeq          115
+        86: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+        89: invokevirtual #569                // Method gg/vape/Vape.getPublicProfileSettings:()Lgg/vape/config/PublicProfileSettings;
+        92: getfield      #874                // Field gg/vape/config/PublicProfileSettings.toggleAlerts:Lgg/vape/value/BooleanValue;
+        95: invokevirtual #581                // Method gg/vape/value/BooleanValue.getEffectiveValue:()Ljava/lang/Boolean;
+        98: invokevirtual #544                // Method java/lang/Boolean.booleanValue:()Z
+       101: ifeq          115
+       104: aload_0
+       105: getfield      #515                // Field suppressStateNotifications:Z
+       108: ifne          115
+       111: aload_2
+       112: invokevirtual #877                // Method gg/vape/module/Mod.showToggleNotification:()V
+       115: return
+
+  public void onModuleEnabled(gg.vape.event.impl.EventModStateChange);
+    Code:
+         0: aload_1
+         1: invokevirtual #850                // Method gg/vape/event/impl/EventModStateChange.getModule:()Lgg/vape/module/Mod;
+         4: astore_2
+         5: aload_1
+         6: invokevirtual #882                // Method gg/vape/event/impl/EventModStateChange.isEnabled:()Z
+         9: ifeq          16
+        12: aload_2
+        13: invokevirtual #885                // Method gg/vape/module/Mod.j:()V
+        16: return
+
+  private static void addMinecraft1214Constraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #643                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_21_4:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #348                // Method gg/vape/wrapper/impl/ForgeVersion.n:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  private void registerHudModules();
+    Code:
+         0: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+         3: new           #887                // class gg/vape/module/render/hud/FreeLookHudModule
+         6: dup
+         7: invokespecial #888                // Method gg/vape/module/render/hud/FreeLookHudModule."<init>":()V
+        10: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+        13: aload_0
+        14: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+        17: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+        20: new           #785                // class gg/vape/module/render/hud/NoClickDelayHudModule
+        23: dup
+        24: invokespecial #889                // Method gg/vape/module/render/hud/NoClickDelayHudModule."<init>":()V
+        27: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+        30: getstatic     #892                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_7_10:Lgg/vape/wrapper/impl/ForgeVersion;
+        33: invokevirtual #895                // Method gg/vape/wrapper/impl/ForgeVersion.N:()Lgg/vape/module/MinecraftVersionConstraint;
+        36: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        39: aload_0
+        40: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+        43: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+        46: new           #792                // class gg/vape/module/none/MouseDelayFix
+        49: dup
+        50: invokespecial #896                // Method gg/vape/module/none/MouseDelayFix."<init>":()V
+        53: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+        56: getstatic     #777                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_8_9:Lgg/vape/wrapper/impl/ForgeVersion;
+        59: invokevirtual #899                // Method gg/vape/wrapper/impl/ForgeVersion.S:()Lgg/vape/module/MinecraftVersionConstraint;
+        62: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        65: aload_0
+        66: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+        69: aload_0
+        70: iconst_3
+        71: anewarray     #65                 // class gg/vape/module/Mod
+        74: dup
+        75: iconst_0
+        76: new           #901                // class gg/vape/module/render/hud/KeystrokesHudModule
+        79: dup
+        80: invokespecial #902                // Method gg/vape/module/render/hud/KeystrokesHudModule."<init>":()V
+        83: aastore
+        84: dup
+        85: iconst_1
+        86: new           #904                // class gg/vape/module/render/hud/ClockHudModule
+        89: dup
+        90: invokespecial #905                // Method gg/vape/module/render/hud/ClockHudModule."<init>":()V
+        93: aastore
+        94: dup
+        95: iconst_2
+        96: new           #907                // class gg/vape/module/render/hud/PotionEffectsHudModule
+        99: dup
+       100: invokespecial #908                // Method gg/vape/module/render/hud/PotionEffectsHudModule."<init>":()V
+       103: aastore
+       104: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       107: invokespecial #278                // Method registerModules:(Ljava/util/stream/Stream;)V
+       110: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+       113: new           #910                // class gg/vape/module/render/hud/BlockhitAnimationHudModule
+       116: dup
+       117: invokespecial #911                // Method gg/vape/module/render/hud/BlockhitAnimationHudModule."<init>":()V
+       120: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+       123: getstatic     #777                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_8_9:Lgg/vape/wrapper/impl/ForgeVersion;
+       126: invokevirtual #899                // Method gg/vape/wrapper/impl/ForgeVersion.S:()Lgg/vape/module/MinecraftVersionConstraint;
+       129: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+       132: aload_0
+       133: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+       136: aload_0
+       137: bipush        11
+       139: anewarray     #65                 // class gg/vape/module/Mod
+       142: dup
+       143: iconst_0
+       144: new           #913                // class gg/vape/module/render/hud/NoHurtDelayHudModule
+       147: dup
+       148: invokespecial #914                // Method gg/vape/module/render/hud/NoHurtDelayHudModule."<init>":()V
+       151: aastore
+       152: dup
+       153: iconst_1
+       154: new           #916                // class gg/vape/module/render/hud/ArmorStatusHudModule
+       157: dup
+       158: invokespecial #917                // Method gg/vape/module/render/hud/ArmorStatusHudModule."<init>":()V
+       161: aastore
+       162: dup
+       163: iconst_2
+       164: new           #919                // class gg/vape/module/render/hud/CompassHudModule
+       167: dup
+       168: invokespecial #920                // Method gg/vape/module/render/hud/CompassHudModule."<init>":()V
+       171: aastore
+       172: dup
+       173: iconst_3
+       174: new           #922                // class gg/vape/module/render/hud/WeatherChangerHudModule
+       177: dup
+       178: invokespecial #923                // Method gg/vape/module/render/hud/WeatherChangerHudModule."<init>":()V
+       181: aastore
+       182: dup
+       183: iconst_4
+       184: new           #925                // class gg/vape/module/render/hud/NoHurtCameraHudModule
+       187: dup
+       188: invokespecial #926                // Method gg/vape/module/render/hud/NoHurtCameraHudModule."<init>":()V
+       191: aastore
+       192: dup
+       193: iconst_5
+       194: new           #928                // class gg/vape/module/render/hud/TimeChangerHudModule
+       197: dup
+       198: invokespecial #929                // Method gg/vape/module/render/hud/TimeChangerHudModule."<init>":()V
+       201: aastore
+       202: dup
+       203: bipush        6
+       205: new           #931                // class gg/vape/module/render/hud/CoordinatesHudModule
+       208: dup
+       209: invokespecial #932                // Method gg/vape/module/render/hud/CoordinatesHudModule."<init>":()V
+       212: aastore
+       213: dup
+       214: bipush        7
+       216: new           #934                // class gg/vape/module/render/hud/FpsDisplayHudModule
+       219: dup
+       220: invokespecial #935                // Method gg/vape/module/render/hud/FpsDisplayHudModule."<init>":()V
+       223: aastore
+       224: dup
+       225: bipush        8
+       227: new           #937                // class gg/vape/module/render/hud/ReachDisplayHudModule
+       230: dup
+       231: invokespecial #938                // Method gg/vape/module/render/hud/ReachDisplayHudModule."<init>":()V
+       234: aastore
+       235: dup
+       236: bipush        9
+       238: new           #940                // class gg/vape/module/render/hud/NoFogHudModule
+       241: dup
+       242: invokespecial #941                // Method gg/vape/module/render/hud/NoFogHudModule."<init>":()V
+       245: aastore
+       246: dup
+       247: bipush        10
+       249: new           #943                // class gg/vape/module/render/hud/BlockOverlayHudModule
+       252: dup
+       253: invokespecial #944                // Method gg/vape/module/render/hud/BlockOverlayHudModule."<init>":()V
+       256: aastore
+       257: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       260: invokespecial #278                // Method registerModules:(Ljava/util/stream/Stream;)V
+       263: invokestatic  #284                // Method gg/vape/manager/ModRegistrationBuilder.create:()Lgg/vape/manager/ModRegistrationBuilder;
+       266: new           #946                // class gg/vape/module/render/hud/BlockRenderColorOverrideHudModule
+       269: dup
+       270: invokespecial #947                // Method gg/vape/module/render/hud/BlockRenderColorOverrideHudModule."<init>":()V
+       273: invokevirtual #291                // Method gg/vape/manager/ModRegistrationBuilder.setModule:(Lgg/vape/module/Mod;)Lgg/vape/manager/ModRegistrationBuilder;
+       276: iconst_2
+       277: anewarray     #702                // class gg/vape/module/MinecraftVersionConstraint
+       280: dup
+       281: iconst_0
+       282: getstatic     #892                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_7_10:Lgg/vape/wrapper/impl/ForgeVersion;
+       285: invokevirtual #895                // Method gg/vape/wrapper/impl/ForgeVersion.N:()Lgg/vape/module/MinecraftVersionConstraint;
+       288: aastore
+       289: dup
+       290: iconst_1
+       291: getstatic     #297                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_16_5:Lgg/vape/wrapper/impl/ForgeVersion;
+       294: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+       297: aastore
+       298: invokevirtual #951                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraints:([Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+       301: aload_0
+       302: invokevirtual #309                // Method gg/vape/manager/ModRegistrationBuilder.registerWith:(Lgg/vape/manager/ModManager;)V
+       305: aload_0
+       306: iconst_2
+       307: anewarray     #65                 // class gg/vape/module/Mod
+       310: dup
+       311: iconst_0
+       312: new           #953                // class gg/vape/module/render/hud/ScoreboardHudModule
+       315: dup
+       316: invokespecial #954                // Method gg/vape/module/render/hud/ScoreboardHudModule."<init>":()V
+       319: aastore
+       320: dup
+       321: iconst_1
+       322: new           #956                // class gg/vape/module/render/hud/InventoryBlurHudModule
+       325: dup
+       326: invokespecial #957                // Method gg/vape/module/render/hud/InventoryBlurHudModule."<init>":()V
+       329: aastore
+       330: invokestatic  #274                // InterfaceMethod java/util/stream/Stream.of:([Ljava/lang/Object;)Ljava/util/stream/Stream;
+       333: invokedynamic #961,  0            // InvokeDynamic #9:accept:()Ljava/util/function/Consumer;
+       338: invokespecial #339                // Method registerModules:(Ljava/util/stream/Stream;Ljava/util/function/Consumer;)V
+       341: return
+
+  public int countEnabledModules(gg.vape.module.Category);
+    Code:
+         0: iconst_0
+         1: istore_2
+         2: aload_0
+         3: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         6: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+        11: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        16: astore_3
+        17: aload_3
+        18: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        23: ifeq          63
+        26: aload_3
+        27: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        32: checkcast     #65                 // class gg/vape/module/Mod
+        35: astore        4
+        37: aload         4
+        39: invokevirtual #524                // Method gg/vape/module/Mod.getCategory:()Lgg/vape/module/Category;
+        42: aload_1
+        43: if_acmpne     17
+        46: aload         4
+        48: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        51: ifne          57
+        54: goto          17
+        57: iinc          2, 1
+        60: goto          17
+        63: iload_2
+        64: ireturn
+
+  public gg.vape.module.world.XRay getXRayModule();
+    Code:
+         0: aload_0
+         1: getfield      #317                // Field xrayModule:Lgg/vape/module/world/XRay;
+         4: areturn
+
+  public com.google.gson.JsonArray toJson(boolean);
+    Code:
+         0: new           #972                // class com/google/gson/JsonArray
+         3: dup
+         4: invokespecial #973                // Method com/google/gson/JsonArray."<init>":()V
+         7: astore_2
+         8: aload_0
+         9: invokevirtual #975                // Method getTopLevelModules:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_3
+        18: aload_3
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          81
+        27: aload_3
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore        4
+        38: aload         4
+        40: ifnonnull     46
+        43: goto          18
+        46: aload         4
+        48: iload_1
+        49: invokevirtual #978                // Method gg/vape/module/Mod.toJson:(Z)Lcom/google/gson/JsonObject;
+        52: astore        5
+        54: aload         5
+        56: ifnonnull     62
+        59: goto          18
+        62: aload_2
+        63: aload         5
+        65: invokevirtual #981                // Method com/google/gson/JsonArray.add:(Lcom/google/gson/JsonElement;)V
+        68: goto          78
+        71: astore        5
+        73: aload         5
+        75: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+        78: goto          18
+        81: aload_2
+        82: areturn
+      Exception table:
+         from    to  target type
+            46    59    71   Class java/lang/Throwable
+            62    68    71   Class java/lang/Throwable
+
+  public com.google.gson.JsonObject getEnabledHudModuleStates();
+    Code:
+         0: new           #490                // class com/google/gson/JsonObject
+         3: dup
+         4: invokespecial #491                // Method com/google/gson/JsonObject."<init>":()V
+         7: astore_1
+         8: aload_0
+         9: invokevirtual #47                 // Method getAllModules:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_2
+        18: aload_2
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          65
+        27: aload_2
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore_3
+        37: aload_3
+        38: instanceof    #493                // class gg/vape/module/render/hud/HudModule
+        41: ifne          47
+        44: goto          18
+        47: aload_1
+        48: aload_3
+        49: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        52: aload_3
+        53: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        56: invokestatic  #503                // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+        59: invokevirtual #507                // Method com/google/gson/JsonObject.addProperty:(Ljava/lang/String;Ljava/lang/Boolean;)V
+        62: goto          18
+        65: aload_1
+        66: areturn
+
+  public static gg.vape.ui.click.component.GuiComponent[] getLegacyCategoryComponents();
+    Code:
+         0: getstatic     #680                // Field legacyCategoryComponents:[Lgg/vape/ui/click/component/GuiComponent;
+         3: areturn
+
+  private static void addBacktrackVersionConstraints(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #777                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_8_9:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #991                // Method gg/vape/wrapper/impl/ForgeVersion.H:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: getstatic     #643                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_21_4:Lgg/vape/wrapper/impl/ForgeVersion;
+        13: invokevirtual #348                // Method gg/vape/wrapper/impl/ForgeVersion.n:()Lgg/vape/module/MinecraftVersionConstraint;
+        16: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        19: pop
+        20: return
+
+  public void applyHudModuleStates(com.google.gson.JsonObject);
+    Code:
+         0: aload_1
+         1: ifnonnull     5
+         4: return
+         5: aload_0
+         6: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+         9: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_2
+        15: aload_2
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          131
+        24: aload_2
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #65                 // class gg/vape/module/Mod
+        33: astore_3
+        34: aload_3
+        35: ifnull        15
+        38: aload_3
+        39: instanceof    #493                // class gg/vape/module/render/hud/HudModule
+        42: ifeq          15
+        45: aload_1
+        46: aload_3
+        47: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        50: invokevirtual #532                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+        53: ifne          59
+        56: goto          15
+        59: aload_1
+        60: aload_3
+        61: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        64: invokevirtual #997                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        67: astore        4
+        69: aload         4
+        71: ifnull        90
+        74: aload         4
+        76: invokevirtual #1002               // Method com/google/gson/JsonElement.isJsonNull:()Z
+        79: ifne          90
+        82: aload         4
+        84: invokevirtual #1005               // Method com/google/gson/JsonElement.isJsonPrimitive:()Z
+        87: ifne          93
+        90: goto          15
+        93: aload         4
+        95: invokevirtual #1008               // Method com/google/gson/JsonElement.getAsBoolean:()Z
+        98: istore        5
+       100: aload_3
+       101: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+       104: iload         5
+       106: if_icmpne     112
+       109: goto          15
+       112: aload_3
+       113: iload         5
+       115: invokevirtual #548                // Method gg/vape/module/Mod.setEnabled:(Z)V
+       118: goto          128
+       121: astore        4
+       123: aload         4
+       125: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       128: goto          15
+       131: return
+      Exception table:
+         from    to  target type
+            59    90   121   Class java/lang/Throwable
+            93   109   121   Class java/lang/Throwable
+           112   118   121   Class java/lang/Throwable
+
+  private static void addMinecraft189Constraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #777                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_8_9:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #991                // Method gg/vape/wrapper/impl/ForgeVersion.H:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  public <T extends gg.vape.module.Mod> T getMod(java.lang.Class<T>);
+    Code:
+         0: aload_0
+         1: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         4: aload_1
+         5: invokeinterface #1015,  2         // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #65                 // class gg/vape/module/Mod
+        13: areturn
+
+  public boolean isOtherInventoryActionActive(java.lang.Class<? extends gg.vape.module.utility.inventory.InventoryActionModule>);
+    Code:
+         0: aload_0
+         1: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         4: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_2
+        15: aload_2
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          80
+        24: aload_2
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #65                 // class gg/vape/module/Mod
+        33: astore_3
+        34: aload_3
+        35: invokevirtual #471                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        38: aload_1
+        39: if_acmpeq     15
+        42: aload_3
+        43: instanceof    #1020               // class gg/vape/module/utility/inventory/InventoryActionModule
+        46: ifne          52
+        49: goto          15
+        52: aload_3
+        53: checkcast     #1020               // class gg/vape/module/utility/inventory/InventoryActionModule
+        56: astore        4
+        58: aload_3
+        59: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        62: ifeq          15
+        65: aload         4
+        67: invokeinterface #1023,  1         // InterfaceMethod gg/vape/module/utility/inventory/InventoryActionModule.isPerformingInventoryAction:()Z
+        72: ifne          78
+        75: goto          15
+        78: iconst_1
+        79: ireturn
+        80: iconst_0
+        81: ireturn
+
+  public void disableNonHudModules();
+    Code:
+         0: aload_0
+         1: iconst_1
+         2: putfield      #515                // Field suppressStateNotifications:Z
+         5: aload_0
+         6: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+         9: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        14: astore_1
+        15: aload_1
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          81
+        24: aload_1
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #65                 // class gg/vape/module/Mod
+        33: astore_2
+        34: aload_2
+        35: ifnull        15
+        38: aload_2
+        39: invokevirtual #524                // Method gg/vape/module/Mod.getCategory:()Lgg/vape/module/Category;
+        42: getstatic     #528                // Field gg/vape/module/Category.NONE:Lgg/vape/module/Category;
+        45: if_acmpeq     15
+        48: aload_2
+        49: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        52: ifeq          15
+        55: aload_2
+        56: instanceof    #493                // class gg/vape/module/render/hud/HudModule
+        59: ifeq          65
+        62: goto          15
+        65: aload_2
+        66: iconst_0
+        67: invokevirtual #548                // Method gg/vape/module/Mod.setEnabled:(Z)V
+        70: goto          78
+        73: astore_3
+        74: aload_3
+        75: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+        78: goto          15
+        81: aload_0
+        82: iconst_0
+        83: putfield      #515                // Field suppressStateNotifications:Z
+        86: goto          99
+        89: astore        4
+        91: aload_0
+        92: iconst_0
+        93: putfield      #515                // Field suppressStateNotifications:Z
+        96: aload         4
+        98: athrow
+        99: return
+      Exception table:
+         from    to  target type
+            65    70    73   Class java/lang/Throwable
+             5    81    89   any
+            89    91    89   any
+
+  public boolean isSuppressStateNotifications();
+    Code:
+         0: aload_0
+         1: getfield      #515                // Field suppressStateNotifications:Z
+         4: ireturn
+
+  public gg.vape.module.Mod getMod(java.lang.String);
+    Code:
+         0: aload_0
+         1: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         4: invokeinterface #1034,  1         // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+         9: invokeinterface #1037,  1         // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+        14: astore_2
+        15: aload_2
+        16: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        21: ifeq          66
+        24: aload_2
+        25: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        30: checkcast     #9                  // class java/util/Map$Entry
+        33: astore_3
+        34: aload_3
+        35: invokeinterface #1040,  1         // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+        40: checkcast     #65                 // class gg/vape/module/Mod
+        43: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        46: aload_1
+        47: invokevirtual #818                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        50: ifne          56
+        53: goto          15
+        56: aload_3
+        57: invokeinterface #1040,  1         // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+        62: checkcast     #65                 // class gg/vape/module/Mod
+        65: areturn
+        66: aconst_null
+        67: areturn
+
+  private static void addMinecraft1710Constraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #892                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_7_10:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #895                // Method gg/vape/wrapper/impl/ForgeVersion.N:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  public java.util.List<gg.vape.module.Mod> getProfileModules(com.google.gson.JsonObject);
+    Code:
+         0: new           #40                 // class java/util/ArrayList
+         3: dup
+         4: invokespecial #44                 // Method java/util/ArrayList."<init>":()V
+         7: astore_2
+         8: aload_0
+         9: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+        12: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        17: astore_3
+        18: aload_3
+        19: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        24: ifeq          82
+        27: aload_3
+        28: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        33: checkcast     #65                 // class gg/vape/module/Mod
+        36: astore        4
+        38: aload_1
+        39: aload         4
+        41: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+        44: invokevirtual #532                // Method com/google/gson/JsonObject.has:(Ljava/lang/String;)Z
+        47: ifeq          18
+        50: aload         4
+        52: invokevirtual #535                // Method gg/vape/module/Mod.isVisible:()Z
+        55: ifeq          18
+        58: aload         4
+        60: invokevirtual #524                // Method gg/vape/module/Mod.getCategory:()Lgg/vape/module/Category;
+        63: getstatic     #528                // Field gg/vape/module/Category.NONE:Lgg/vape/module/Category;
+        66: if_acmpne     72
+        69: goto          18
+        72: aload_2
+        73: aload         4
+        75: invokevirtual #71                 // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+        78: pop
+        79: goto          18
+        82: aload_2
+        83: areturn
+
+  public java.util.Collection<gg.vape.module.Mod> getAllModules();
+    Code:
+         0: aload_0
+         1: getfield      #646                // Field allModulesByType:Ljava/util/Map;
+         4: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: areturn
+
+  private static void addMinecraft1165Constraint(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: getstatic     #297                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_16_5:Lgg/vape/wrapper/impl/ForgeVersion;
+         4: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+         7: invokevirtual #305                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraint:(Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        10: pop
+        11: return
+
+  private static void noAdditionalConstraints(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: return
+
+  public java.util.Collection<gg.vape.module.Mod> collectMods();
+    Code:
+         0: aload_0
+         1: getfield      #708                // Field activeModulesByType:Ljava/util/Map;
+         4: invokeinterface #649,  1          // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: areturn
+
+  public void loadJson(com.google.gson.JsonArray);
+    Code:
+         0: aload_1
+         1: ifnonnull     5
+         4: return
+         5: iconst_0
+         6: istore_2
+         7: iload_2
+         8: aload_1
+         9: invokevirtual #1053               // Method com/google/gson/JsonArray.size:()I
+        12: if_icmpge     177
+        15: aload_1
+        16: iload_2
+        17: invokevirtual #1056               // Method com/google/gson/JsonArray.get:(I)Lcom/google/gson/JsonElement;
+        20: astore        4
+        22: aload         4
+        24: ifnull        171
+        27: aload         4
+        29: invokevirtual #1059               // Method com/google/gson/JsonElement.isJsonObject:()Z
+        32: ifeq          171
+        35: aload         4
+        37: invokevirtual #1002               // Method com/google/gson/JsonElement.isJsonNull:()Z
+        40: ifne          171
+        43: aload         4
+        45: invokevirtual #1062               // Method com/google/gson/JsonElement.getAsJsonObject:()Lcom/google/gson/JsonObject;
+        48: dup
+        49: astore_3
+        50: ldc_w         #1063               // String name
+        53: invokevirtual #997                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        56: ifnull        171
+        59: aload_3
+        60: ldc_w         #1063               // String name
+        63: invokevirtual #997                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        66: invokevirtual #1002               // Method com/google/gson/JsonElement.isJsonNull:()Z
+        69: ifeq          75
+        72: goto          171
+        75: aload_3
+        76: ldc_w         #1063               // String name
+        79: invokevirtual #997                // Method com/google/gson/JsonObject.get:(Ljava/lang/String;)Lcom/google/gson/JsonElement;
+        82: invokevirtual #1066               // Method com/google/gson/JsonElement.getAsString:()Ljava/lang/String;
+        85: astore        5
+        87: aload_0
+        88: invokevirtual #975                // Method getTopLevelModules:()Ljava/util/Collection;
+        91: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        96: astore        6
+        98: aload         6
+       100: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+       105: ifeq          171
+       108: aload         6
+       110: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+       115: checkcast     #65                 // class gg/vape/module/Mod
+       118: astore        7
+       120: aload         7
+       122: ifnonnull     128
+       125: goto          98
+       128: aload         7
+       130: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+       133: aload         5
+       135: invokevirtual #1069               // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+       138: ifne          144
+       141: goto          98
+       144: aload         7
+       146: aload_3
+       147: invokevirtual #1071               // Method gg/vape/module/Mod.loadJson:(Lcom/google/gson/JsonObject;)V
+       150: goto          168
+       153: astore        8
+       155: aload         7
+       157: invokevirtual #497                // Method gg/vape/module/Mod.getName:()Ljava/lang/String;
+       160: invokestatic  #1075               // Method gg/vape/Vape.debugLog:(Ljava/lang/String;)V
+       163: aload         8
+       165: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       168: goto          98
+       171: iinc          2, 1
+       174: goto          7
+       177: return
+      Exception table:
+         from    to  target type
+           128   141   153   Class java/lang/Throwable
+           144   150   153   Class java/lang/Throwable
+
+  public void disableHiddenModules();
+    Code:
+         0: iconst_0
+         1: istore_1
+         2: aload_0
+         3: invokevirtual #467                // Method collectMods:()Ljava/util/Collection;
+         6: invokeinterface #53,  1           // InterfaceMethod java/util/Collection.iterator:()Ljava/util/Iterator;
+        11: astore_2
+        12: aload_2
+        13: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        18: ifeq          86
+        21: aload_2
+        22: invokeinterface #63,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        27: checkcast     #65                 // class gg/vape/module/Mod
+        30: astore_3
+        31: aload_3
+        32: ifnull        12
+        35: aload_3
+        36: invokevirtual #535                // Method gg/vape/module/Mod.isVisible:()Z
+        39: ifne          12
+        42: aload_3
+        43: instanceof    #85                 // class gg/vape/module/none/ClientSettings
+        46: ifne          12
+        49: aload_3
+        50: invokevirtual #558                // Method gg/vape/module/Mod.getGuiColor:()I
+        53: ifeq          12
+        56: aload_3
+        57: invokevirtual #477                // Method gg/vape/module/Mod.isEnabled:()Z
+        60: ifne          66
+        63: goto          12
+        66: iinc          1, 1
+        69: aload_3
+        70: invokevirtual #561                // Method gg/vape/module/Mod.toggle:()V
+        73: goto          83
+        76: astore        4
+        78: aload         4
+        80: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+        83: goto          12
+        86: iload_1
+        87: ifle          137
+        90: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+        93: invokevirtual #587                // Method gg/vape/Vape.getNotificationManager:()Lgg/vape/notification/NotificationManager;
+        96: ifnull        137
+        99: getstatic     #565                // Field gg/vape/Vape.INSTANCE:Lgg/vape/Vape;
+       102: invokevirtual #587                // Method gg/vape/Vape.getNotificationManager:()Lgg/vape/notification/NotificationManager;
+       105: ldc_w         #1080               // String Hidden Disabled
+       108: new           #589                // class java/lang/StringBuilder
+       111: dup
+       112: invokespecial #590                // Method java/lang/StringBuilder."<init>":()V
+       115: iload_1
+       116: invokevirtual #617                // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+       119: ldc_w         #1082               // String  module(s) have been disabled!
+       122: invokevirtual #596                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       125: invokevirtual #608                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       128: getstatic     #1088               // Field gg/vape/notification/NotificationType.WARNING:Lgg/vape/notification/NotificationType;
+       131: ldc2_w        #1089               // long 2500l
+       134: invokevirtual #1093               // Method gg/vape/notification/NotificationManager.show:(Ljava/lang/String;Ljava/lang/String;Lgg/vape/notification/NotificationType;J)V
+       137: goto          145
+       140: astore_2
+       141: aload_2
+       142: invokestatic  #554                // Method gg/vape/Vape.logThrowable:(Ljava/lang/Throwable;)V
+       145: return
+      Exception table:
+         from    to  target type
+            66    73    76   Class java/lang/Throwable
+             2   137   140   Class java/lang/Throwable
+
+  public gg.vape.manager.ModManager();
+    Code:
+         0: aload_0
+         1: invokespecial #1095               // Method java/lang/Object."<init>":()V
+         4: invokestatic  #83                 // Method gg/vape/module/Category.getLegacyComponents:()[Lgg/vape/ui/click/component/GuiComponent;
+         7: astore_1
+         8: sipush        877
+        11: anewarray     #4                  // class java/lang/Object
+        14: astore_2
+        15: getstatic     #1100               // Field java/lang/Long.TYPE:Ljava/lang/Class;
+        18: sipush        837
+        21: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        24: pop
+        25: getstatic     #1109               // Field java/lang/Byte.TYPE:Ljava/lang/Class;
+        28: sipush        904
+        31: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        34: pop
+        35: getstatic     #1112               // Field java/lang/Float.TYPE:Ljava/lang/Class;
+        38: sipush        627
+        41: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        44: pop
+        45: getstatic     #1115               // Field java/lang/Short.TYPE:Ljava/lang/Class;
+        48: sipush        845
+        51: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        54: pop
+        55: ldc           #4                  // class java/lang/Object
+        57: sipush        823
+        60: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        63: pop
+        64: getstatic     #1118               // Field java/lang/Character.TYPE:Ljava/lang/Class;
+        67: sipush        598
+        70: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        73: pop
+        74: getstatic     #1121               // Field java/lang/Double.TYPE:Ljava/lang/Class;
+        77: sipush        654
+        80: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        83: pop
+        84: aload_1
+        85: astore_3
+        86: getstatic     #1124               // Field java/lang/Integer.TYPE:Ljava/lang/Class;
+        89: sipush        556
+        92: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+        95: pop
+        96: getstatic     #1125               // Field java/lang/Boolean.TYPE:Ljava/lang/Class;
+        99: sipush        506
+       102: invokestatic  #1106               // Method java/lang/reflect/Array.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object;
+       105: pop
+       106: aload_0
+       107: new           #1127               // class java/util/LinkedHashMap
+       110: dup
+       111: invokespecial #1128               // Method java/util/LinkedHashMap."<init>":()V
+       114: putfield      #646                // Field allModulesByType:Ljava/util/Map;
+       117: aload_0
+       118: new           #1127               // class java/util/LinkedHashMap
+       121: dup
+       122: invokespecial #1128               // Method java/util/LinkedHashMap."<init>":()V
+       125: putfield      #708                // Field activeModulesByType:Ljava/util/Map;
+       128: aload_0
+       129: new           #852                // class java/util/HashSet
+       132: dup
+       133: invokespecial #1129               // Method java/util/HashSet."<init>":()V
+       136: putfield      #677                // Field enabledModules:Ljava/util/HashSet;
+       139: aload_0
+       140: new           #40                 // class java/util/ArrayList
+       143: dup
+       144: invokespecial #44                 // Method java/util/ArrayList."<init>":()V
+       147: putfield      #710                // Field activeModuleList:Ljava/util/ArrayList;
+       150: aload_0
+       151: new           #610                // class gg/vape/notification/ReusableTextNotification
+       154: dup
+       155: getstatic     #1132               // Field gg/vape/notification/NotificationType.INFO:Lgg/vape/notification/NotificationType;
+       158: ldc_w         #817                // String
+       161: ldc_w         #817                // String
+       164: ldc2_w        #1133               // long 2000l
+       167: invokespecial #1137               // Method gg/vape/notification/ReusableTextNotification."<init>":(Lgg/vape/notification/NotificationType;Ljava/lang/String;Ljava/lang/String;J)V
+       170: putfield      #583                // Field profileSwitchNotification:Lgg/vape/notification/ReusableTextNotification;
+       173: invokestatic  #1140               // Method gg/vape/ui/click/component/GuiComponent.getLegacyComponentState:()[Lgg/vape/ui/click/component/GuiComponent;
+       176: ifnonnull     186
+       179: iconst_1
+       180: anewarray     #446                // class gg/vape/ui/click/component/GuiComponent
+       183: invokestatic  #1143               // Method gg/vape/module/Category.setLegacyComponents:([Lgg/vape/ui/click/component/GuiComponent;)V
+       186: return
+
+  public java.util.ArrayList<gg.vape.module.Mod> getActiveModuleList();
+    Code:
+         0: aload_0
+         1: getfield      #710                // Field activeModuleList:Ljava/util/ArrayList;
+         4: areturn
+
+  private static void addBedPlatesVersionConstraints(gg.vape.manager.ModRegistrationBuilder);
+    Code:
+         0: aload_0
+         1: iconst_2
+         2: anewarray     #702                // class gg/vape/module/MinecraftVersionConstraint
+         5: dup
+         6: iconst_0
+         7: getstatic     #892                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_7_10:Lgg/vape/wrapper/impl/ForgeVersion;
+        10: invokevirtual #895                // Method gg/vape/wrapper/impl/ForgeVersion.N:()Lgg/vape/module/MinecraftVersionConstraint;
+        13: aastore
+        14: dup
+        15: iconst_1
+        16: getstatic     #484                // Field gg/vape/wrapper/impl/ForgeVersion.MC_1_20_6:Lgg/vape/wrapper/impl/ForgeVersion;
+        19: invokevirtual #301                // Method gg/vape/wrapper/impl/ForgeVersion.b:()Lgg/vape/module/MinecraftVersionConstraint;
+        22: aastore
+        23: invokevirtual #951                // Method gg/vape/manager/ModRegistrationBuilder.addVersionConstraints:([Lgg/vape/module/MinecraftVersionConstraint;)Lgg/vape/manager/ModRegistrationBuilder;
+        26: pop
+        27: return
+
+  private void lambda$registerModules$0(java.util.function.Consumer, gg.vape.module.Mod);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokespecial #1151               // Method registerModuleWithCustomizer:(Ljava/util/function/Consumer;Lgg/vape/module/Mod;)V
+         6: return
+
+  static {};
+    Code:
+         0: iconst_4
+         1: anewarray     #446                // class gg/vape/ui/click/component/GuiComponent
+         4: invokestatic  #1154               // Method setLegacyCategoryComponents:([Lgg/vape/ui/click/component/GuiComponent;)V
+         7: return
+}

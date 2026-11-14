@@ -1,0 +1,53 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_api_ApiAccessTokenProvider.class does not contain class 
+gg_vape_api_ApiAccessTokenProvider
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...ssTokenProvider:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "ApiAccessTokenProvider.java"
+public class gg.vape.api.ApiAccessTokenProvider {
+  private static java.lang.String cachedAccessToken;
+
+  private static java.lang.String opaqueMarker;
+
+  public gg.vape.api.ApiAccessTokenProvider();
+    Code:
+         0: aload_0
+         1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public static void setOpaqueMarker(java.lang.String);
+    Code:
+         0: aload_0
+         1: putstatic     #18                 // Field opaqueMarker:Ljava/lang/String;
+         4: return
+
+  public static java.lang.String getAccessToken();
+    Code:
+         0: getstatic     #23                 // Field cachedAccessToken:Ljava/lang/String;
+         3: ifnonnull     9
+         6: invokestatic  #26                 // Method loadAccessToken:()V
+         9: getstatic     #23                 // Field cachedAccessToken:Ljava/lang/String;
+        12: areturn
+
+  private static void loadAccessToken();
+    Code:
+         0: invokestatic  #31                 // Method gg/vape/runtime/NativeBridge.gat:()Ljava/lang/String;
+         3: putstatic     #23                 // Field cachedAccessToken:Ljava/lang/String;
+         6: return
+
+  public static java.lang.String getOpaqueMarker();
+    Code:
+         0: getstatic     #18                 // Field opaqueMarker:Ljava/lang/String;
+         3: areturn
+
+  static {};
+    Code:
+         0: invokestatic  #35                 // Method getOpaqueMarker:()Ljava/lang/String;
+         3: ifnonnull     11
+         6: ldc           #37                 // String Sx5Qoc
+         8: invokestatic  #39                 // Method setOpaqueMarker:(Ljava/lang/String;)V
+        11: return
+}

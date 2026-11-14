@@ -1,0 +1,87 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_LicenseStatus.class does not contain class 
+gg_vape_account_LicenseStatus
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...t_LicenseStatus:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "LicenseStatus.java"
+public class gg.vape.account.LicenseStatus implements gg.vape.account.AccountCredentials {
+  private final java.lang.String password;
+
+  private static final java.lang.String GENERATED_ACCOUNT_PASSWORD;
+
+  private final java.lang.String username;
+
+  private final boolean generatedAccount;
+
+  private static java.lang.String sharedStatus;
+
+  public static java.lang.String getSharedStatus();
+    Code:
+         0: getstatic     #18                 // Field sharedStatus:Ljava/lang/String;
+         3: areturn
+
+  public boolean isGeneratedAccount();
+    Code:
+         0: aload_0
+         1: getfield      #22                 // Field generatedAccount:Z
+         4: ireturn
+
+  public static void setSharedStatus(java.lang.String);
+    Code:
+         0: aload_0
+         1: putstatic     #18                 // Field sharedStatus:Ljava/lang/String;
+         4: return
+
+  public java.lang.String getUsername();
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field username:Ljava/lang/String;
+         4: areturn
+
+  public gg.vape.account.LicenseStatus(java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #34                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #30                 // Field username:Ljava/lang/String;
+         9: aload_0
+        10: getstatic     #36                 // Field GENERATED_ACCOUNT_PASSWORD:Ljava/lang/String;
+        13: putfield      #38                 // Field password:Ljava/lang/String;
+        16: aload_0
+        17: iconst_1
+        18: putfield      #22                 // Field generatedAccount:Z
+        21: return
+
+  public gg.vape.account.LicenseStatus(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #34                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #30                 // Field username:Ljava/lang/String;
+         9: aload_0
+        10: aload_2
+        11: putfield      #38                 // Field password:Ljava/lang/String;
+        14: aload_0
+        15: iconst_0
+        16: putfield      #22                 // Field generatedAccount:Z
+        19: return
+
+  public java.lang.String getPassword();
+    Code:
+         0: aload_0
+         1: getfield      #38                 // Field password:Ljava/lang/String;
+         4: areturn
+
+  static {};
+    Code:
+         0: aconst_null
+         1: invokestatic  #44                 // Method setSharedStatus:(Ljava/lang/String;)V
+         4: ldc           #45                 // String password
+         6: putstatic     #36                 // Field GENERATED_ACCOUNT_PASSWORD:Ljava/lang/String;
+         9: return
+}

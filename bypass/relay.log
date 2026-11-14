@@ -1,0 +1,10 @@
+15:27:44 POST /loader/login  headers={'Content-Type': 'application/json; charset=utf-8', 'User-Agent': 'Microsoft-WNS/10.0', 'Host': '127.0.0.1:8091'}  body=b'{"username":"lemon@gmail.com","password":"lemon@verox","hwid":"A4BE5865"}'
+15:27:44 POST /api/v1/client/request-payload  headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Microsoft-WNS/10.0', 'Host': '127.0.0.1:8091'}  body=b'token=0000000000000000000000000000000000000000000000000000000000000000'
+15:27:44 POST /api/v1/client/payload  headers={'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'Microsoft-WNS/10.0', 'Host': '127.0.0.1:8091'}  body=b'downloadToken=0000000000000000000000000000000000000000000000000000000000000000'
+15:27:44 serving payload: 264 bytes
+15:31:10 listening on 0.0.0.0:8091
+15:31:19 POST /loader/login  headers={'Content-Type': 'application/json; charset=utf-8', 'User-Agent': 'Microsoft-WNS/10.0', 'Host': '127.0.0.1:8091'}  body=b'{"username":"lemon@gmail.com","password":"lemon@verox","hwid":"A4BE5865"}'
+15:31:19 rejecting login attempt 1 (forced failure)
+15:34:20 listening on 0.0.0.0:8091
+15:34:22 GET /api/v1/client/payload b''
+15:34:22     serving payload 25160704 bytes

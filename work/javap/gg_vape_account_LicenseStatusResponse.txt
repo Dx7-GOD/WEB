@@ -1,0 +1,64 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_account_LicenseStatusResponse.class does not contain class 
+gg_vape_account_LicenseStatusResponse
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...eStatusResponse:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "LicenseStatusResponse.java"
+public class gg.vape.account.LicenseStatusResponse {
+  private java.lang.String skin;
+
+  private boolean limited;
+
+  private java.util.List<java.lang.String> info;
+
+  private java.lang.String token;
+
+  private java.lang.String username;
+
+  private java.lang.String password;
+
+  public gg.vape.account.LicenseStatusResponse();
+    Code:
+         0: aload_0
+         1: invokespecial #23                 // Method java/lang/Object."<init>":()V
+         4: return
+
+  public java.lang.String getToken();
+    Code:
+         0: aload_0
+         1: getfield      #29                 // Field token:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getSkin();
+    Code:
+         0: aload_0
+         1: getfield      #32                 // Field skin:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getUsername();
+    Code:
+         0: aload_0
+         1: getfield      #35                 // Field username:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getPassword();
+    Code:
+         0: aload_0
+         1: getfield      #38                 // Field password:Ljava/lang/String;
+         4: areturn
+
+  public boolean isLimited();
+    Code:
+         0: aload_0
+         1: getfield      #42                 // Field limited:Z
+         4: ireturn
+
+  public java.util.List<java.lang.String> getInfo();
+    Code:
+         0: aload_0
+         1: getfield      #47                 // Field info:Ljava/util/List;
+         4: areturn
+}

@@ -1,0 +1,72 @@
+﻿Compiled from "ModuleDisplayInfo.java"
+public class gg.vape.module.ModuleDisplayInfo {
+  private final java.lang.String suffix;
+
+  private final java.lang.String label;
+
+  private final java.lang.String description;
+
+  private final java.awt.Color color;
+
+  public gg.vape.module.ModuleDisplayInfo(java.lang.String, java.awt.Color, java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: invokespecial #16                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #18                 // Field label:Ljava/lang/String;
+         9: aload_0
+        10: aload_2
+        11: putfield      #20                 // Field color:Ljava/awt/Color;
+        14: aload_0
+        15: aload_3
+        16: putfield      #22                 // Field description:Ljava/lang/String;
+        19: aload_0
+        20: aload         4
+        22: putfield      #24                 // Field suffix:Ljava/lang/String;
+        25: return
+
+  public java.lang.String getLabel();
+    Code:
+         0: aload_0
+         1: getfield      #18                 // Field label:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getDescription();
+    Code:
+         0: aload_0
+         1: getfield      #22                 // Field description:Ljava/lang/String;
+         4: areturn
+
+  public java.awt.Color getColor();
+    Code:
+         0: aload_0
+         1: getfield      #20                 // Field color:Ljava/awt/Color;
+         4: areturn
+
+  public gg.vape.module.ModuleDisplayInfo(java.lang.String, java.awt.Color);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aconst_null
+         4: aconst_null
+         5: invokespecial #34                 // Method "<init>":(Ljava/lang/String;Ljava/awt/Color;Ljava/lang/String;Ljava/lang/String;)V
+         8: return
+
+  public gg.vape.module.ModuleDisplayInfo(java.lang.String, java.awt.Color, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aconst_null
+         4: aload_3
+         5: invokespecial #34                 // Method "<init>":(Ljava/lang/String;Ljava/awt/Color;Ljava/lang/String;Ljava/lang/String;)V
+         8: return
+
+  public java.lang.String getSuffix();
+    Code:
+         0: aload_0
+         1: getfield      #24                 // Field suffix:Ljava/lang/String;
+         4: areturn
+}

@@ -1,0 +1,258 @@
+﻿Compiled from "Category.java"
+public class gg.vape.module.Category implements gg.vape.unmap.INamed {
+  public static gg.vape.module.Category COMBAT;
+
+  public static gg.vape.module.Category RENDER;
+
+  public static gg.vape.module.Category NONE;
+
+  private final java.lang.String name;
+
+  public static gg.vape.module.Category WORLD;
+
+  private static java.util.List<gg.vape.module.Category> values;
+
+  private final int color;
+
+  private final java.lang.String description;
+
+  public static gg.vape.module.Category INVENTORY;
+
+  public static gg.vape.module.Category HIDDEN;
+
+  private static gg.vape.ui.click.component.GuiComponent[] components;
+
+  public static gg.vape.module.Category UTILITY;
+
+  private final java.lang.String iconKey;
+
+  public static gg.vape.module.Category OTHER;
+
+  public static gg.vape.module.Category FAVORITES;
+
+  public static gg.vape.module.Category NETWORK;
+
+  public static gg.vape.ui.click.component.GuiComponent[] getLegacyComponents();
+    Code:
+         0: getstatic     #33                 // Field components:[Lgg/vape/ui/click/component/GuiComponent;
+         3: areturn
+
+  public int getColor();
+    Code:
+         0: aload_0
+         1: getfield      #37                 // Field color:I
+         4: ireturn
+
+  private gg.vape.module.Category(java.lang.String, java.lang.String, java.lang.String, int);
+    Code:
+         0: aload_0
+         1: invokespecial #43                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #45                 // Field name:Ljava/lang/String;
+         9: aload_0
+        10: aload_2
+        11: putfield      #47                 // Field iconKey:Ljava/lang/String;
+        14: aload_0
+        15: aload_3
+        16: putfield      #49                 // Field description:Ljava/lang/String;
+        19: aload_0
+        20: iload         4
+        22: putfield      #37                 // Field color:I
+        25: return
+
+  private gg.vape.module.Category(java.lang.String, java.lang.String, int);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: ldc           #52                 // String
+         5: iload_3
+         6: invokespecial #54                 // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+         9: return
+
+  public java.lang.String toString();
+    Code:
+         0: aload_0
+         1: getfield      #45                 // Field name:Ljava/lang/String;
+         4: areturn
+
+  public static void setLegacyComponents(gg.vape.ui.click.component.GuiComponent[]);
+    Code:
+         0: aload_0
+         1: putstatic     #33                 // Field components:[Lgg/vape/ui/click/component/GuiComponent;
+         4: return
+
+  public java.lang.String getName();
+    Code:
+         0: aload_0
+         1: getfield      #45                 // Field name:Ljava/lang/String;
+         4: areturn
+
+  public static java.util.List<gg.vape.module.Category> values();
+    Code:
+         0: getstatic     #64                 // Field values:Ljava/util/List;
+         3: areturn
+
+  public static void destruct();
+    Code:
+         0: getstatic     #64                 // Field values:Ljava/util/List;
+         3: invokeinterface #70,  1           // InterfaceMethod java/util/List.clear:()V
+         8: aconst_null
+         9: putstatic     #64                 // Field values:Ljava/util/List;
+        12: aconst_null
+        13: putstatic     #72                 // Field NONE:Lgg/vape/module/Category;
+        16: aconst_null
+        17: putstatic     #74                 // Field COMBAT:Lgg/vape/module/Category;
+        20: aconst_null
+        21: putstatic     #76                 // Field UTILITY:Lgg/vape/module/Category;
+        24: aconst_null
+        25: putstatic     #78                 // Field RENDER:Lgg/vape/module/Category;
+        28: aconst_null
+        29: putstatic     #80                 // Field OTHER:Lgg/vape/module/Category;
+        32: aconst_null
+        33: putstatic     #82                 // Field WORLD:Lgg/vape/module/Category;
+        36: aconst_null
+        37: putstatic     #84                 // Field FAVORITES:Lgg/vape/module/Category;
+        40: aconst_null
+        41: putstatic     #86                 // Field INVENTORY:Lgg/vape/module/Category;
+        44: aconst_null
+        45: putstatic     #88                 // Field NETWORK:Lgg/vape/module/Category;
+        48: aconst_null
+        49: putstatic     #90                 // Field HIDDEN:Lgg/vape/module/Category;
+        52: return
+
+  public java.lang.String getDescription();
+    Code:
+         0: aload_0
+         1: getfield      #49                 // Field description:Ljava/lang/String;
+         4: areturn
+
+  public java.lang.String getIconKey();
+    Code:
+         0: aload_0
+         1: getfield      #47                 // Field iconKey:Ljava/lang/String;
+         4: areturn
+
+  static {};
+    Code:
+         0: invokestatic  #95                 // Method getLegacyComponents:()[Lgg/vape/ui/click/component/GuiComponent;
+         3: ifnonnull     13
+         6: iconst_4
+         7: anewarray     #97                 // class gg/vape/ui/click/component/GuiComponent
+        10: invokestatic  #99                 // Method setLegacyComponents:([Lgg/vape/ui/click/component/GuiComponent;)V
+        13: new           #2                  // class gg/vape/module/Category
+        16: dup
+        17: ldc           #101                // String None
+        19: ldc           #103                // String newfavorites
+        21: ldc           #104                // int -2914273
+        23: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+        26: putstatic     #72                 // Field NONE:Lgg/vape/module/Category;
+        29: new           #2                  // class gg/vape/module/Category
+        32: dup
+        33: ldc           #108                // String Combat
+        35: ldc           #110                // String combat
+        37: ldc           #112                // String Combat advantage modules
+        39: ldc           #113                // int -2745594
+        41: invokespecial #54                 // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+        44: putstatic     #74                 // Field COMBAT:Lgg/vape/module/Category;
+        47: new           #2                  // class gg/vape/module/Category
+        50: dup
+        51: ldc           #115                // String Utility
+        53: ldc           #117                // String utility
+        55: ldc           #118                // int -14970556
+        57: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+        60: putstatic     #76                 // Field UTILITY:Lgg/vape/module/Category;
+        63: new           #2                  // class gg/vape/module/Category
+        66: dup
+        67: ldc           #120                // String Render
+        69: ldc           #122                // String render
+        71: ldc           #124                // String All kinds of visual goodies
+        73: ldc           #125                // int -7926107
+        75: invokespecial #54                 // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+        78: putstatic     #78                 // Field RENDER:Lgg/vape/module/Category;
+        81: new           #2                  // class gg/vape/module/Category
+        84: dup
+        85: ldc           #127                // String World
+        87: ldc           #129                // String world
+        89: ldc           #130                // int -12170992
+        91: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+        94: putstatic     #82                 // Field WORLD:Lgg/vape/module/Category;
+        97: new           #2                  // class gg/vape/module/Category
+       100: dup
+       101: ldc           #132                // String Inventory
+       103: ldc           #134                // String inventory
+       105: ldc           #130                // int -12170992
+       107: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+       110: putstatic     #86                 // Field INVENTORY:Lgg/vape/module/Category;
+       113: new           #2                  // class gg/vape/module/Category
+       116: dup
+       117: ldc           #136                // String Network
+       119: ldc           #138                // String online
+       121: ldc           #139                // int -14651232
+       123: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+       126: putstatic     #88                 // Field NETWORK:Lgg/vape/module/Category;
+       129: new           #2                  // class gg/vape/module/Category
+       132: dup
+       133: ldc           #141                // String Other
+       135: ldc           #143                // String other
+       137: ldc           #144                // int -2419323
+       139: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+       142: putstatic     #80                 // Field OTHER:Lgg/vape/module/Category;
+       145: new           #2                  // class gg/vape/module/Category
+       148: dup
+       149: ldc           #146                // String Favorites
+       151: ldc           #103                // String newfavorites
+       153: ldc           #52                 // String
+       155: iconst_0
+       156: invokespecial #54                 // Method "<init>":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+       159: putstatic     #84                 // Field FAVORITES:Lgg/vape/module/Category;
+       162: new           #2                  // class gg/vape/module/Category
+       165: dup
+       166: ldc           #148                // String Hidden
+       168: ldc           #150                // String favorites
+       170: ldc           #144                // int -2419323
+       172: invokespecial #106                // Method "<init>":(Ljava/lang/String;Ljava/lang/String;I)V
+       175: putstatic     #90                 // Field HIDDEN:Lgg/vape/module/Category;
+       178: new           #152                // class java/util/ArrayList
+       181: dup
+       182: invokespecial #153                // Method java/util/ArrayList."<init>":()V
+       185: putstatic     #64                 // Field values:Ljava/util/List;
+       188: getstatic     #64                 // Field values:Ljava/util/List;
+       191: getstatic     #84                 // Field FAVORITES:Lgg/vape/module/Category;
+       194: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       199: pop
+       200: getstatic     #64                 // Field values:Ljava/util/List;
+       203: getstatic     #74                 // Field COMBAT:Lgg/vape/module/Category;
+       206: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       211: pop
+       212: getstatic     #64                 // Field values:Ljava/util/List;
+       215: getstatic     #78                 // Field RENDER:Lgg/vape/module/Category;
+       218: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       223: pop
+       224: getstatic     #64                 // Field values:Ljava/util/List;
+       227: getstatic     #76                 // Field UTILITY:Lgg/vape/module/Category;
+       230: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       235: pop
+       236: getstatic     #64                 // Field values:Ljava/util/List;
+       239: getstatic     #82                 // Field WORLD:Lgg/vape/module/Category;
+       242: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       247: pop
+       248: getstatic     #64                 // Field values:Ljava/util/List;
+       251: getstatic     #86                 // Field INVENTORY:Lgg/vape/module/Category;
+       254: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       259: pop
+       260: getstatic     #64                 // Field values:Ljava/util/List;
+       263: getstatic     #88                 // Field NETWORK:Lgg/vape/module/Category;
+       266: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       271: pop
+       272: getstatic     #64                 // Field values:Ljava/util/List;
+       275: getstatic     #80                 // Field OTHER:Lgg/vape/module/Category;
+       278: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       283: pop
+       284: getstatic     #64                 // Field values:Ljava/util/List;
+       287: getstatic     #72                 // Field NONE:Lgg/vape/module/Category;
+       290: invokeinterface #157,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       295: pop
+       296: return
+}

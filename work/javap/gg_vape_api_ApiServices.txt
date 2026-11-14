@@ -1,0 +1,233 @@
+﻿javap.exe : Warning: File D:\vape\work\jarc\gg_vape_api_ApiServices.class does not contain class 
+gg_vape_api_ApiServices
+At line:1 char:230
++ ... ame+'.txt'; & $jp -p -c -constants -cp D:\vape\work\jarc $_.BaseName  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning: File D...api_ApiServices:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Compiled from "ApiServices.java"
+public class gg.vape.api.ApiServices {
+  private final java.lang.String baseUrl;
+
+  private final gg.vape.api.UserDataApi userDataApi;
+
+  private final gg.vape.api.PublicProfileApi publicProfileApi;
+
+  private static gg.vape.api.ApiServices instance;
+
+  private static gg.vape.ui.click.component.GuiComponent[] legacyComponentState;
+
+  private final gg.vape.api.SettingsApi settingsApi;
+
+  public gg.vape.api.PublicProfileApi getPublicProfileApi();
+    Code:
+         0: aload_0
+         1: getfield      #26                 // Field publicProfileApi:Lgg/vape/api/PublicProfileApi;
+         4: areturn
+
+  public java.util.concurrent.CompletableFuture<gg.vape.api.ApiResponse<gg.vape.account.AccountInfoResponse>> getAccountInfo();
+    Code:
+         0: invokestatic  #36                 // Method gg/vape/api/ApiAccessTokenProvider.getAccessToken:()Ljava/lang/String;
+         3: astore_1
+         4: aload_0
+         5: aload_1
+         6: invokedynamic #56,  0             // InvokeDynamic #0:get:(Lgg/vape/api/ApiServices;Ljava/lang/String;)Ljava/util/function/Supplier;
+        11: invokestatic  #62                 // Method java/util/concurrent/CompletableFuture.supplyAsync:(Ljava/util/function/Supplier;)Ljava/util/concurrent/CompletableFuture;
+        14: areturn
+
+  public static gg.vape.ui.click.component.GuiComponent[] getLegacyComponentState();
+    Code:
+         0: getstatic     #67                 // Field legacyComponentState:[Lgg/vape/ui/click/component/GuiComponent;
+         3: areturn
+
+  private gg.vape.api.ApiResponse requestRegistration(java.lang.String);
+    Code:
+         0: invokestatic  #36                 // Method gg/vape/api/ApiAccessTokenProvider.getAccessToken:()Ljava/lang/String;
+         3: astore_3
+         4: new           #72                 // class java/lang/StringBuilder
+         7: dup
+         8: invokespecial #76                 // Method java/lang/StringBuilder."<init>":()V
+        11: astore        4
+        13: aload_0
+        14: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        17: pop
+        18: aload         4
+        20: aload_0
+        21: getfield      #82                 // Field baseUrl:Ljava/lang/String;
+        24: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        27: ldc           #88                 // String /api/v1/
+        29: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        32: aload_3
+        33: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        36: ldc           #90                 // String /register/
+        38: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        41: aload_1
+        42: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        45: invokevirtual #93                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        48: ldc           #95                 // class gg/vape/api/ApiResponse
+        50: invokestatic  #100                // Method gg/vape/api/ApiHttpClient.get:(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+        53: checkcast     #95                 // class gg/vape/api/ApiResponse
+        56: astore_2
+        57: goto          72
+        60: astore        4
+        62: new           #104                // class java/lang/RuntimeException
+        65: dup
+        66: aload         4
+        68: invokespecial #107                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+        71: athrow
+        72: aload_2
+        73: areturn
+      Exception table:
+         from    to  target type
+             4    57    60   Class java/lang/Exception
+
+  public static gg.vape.api.ApiServices getInstance();
+    Code:
+         0: getstatic     #118                // Field instance:Lgg/vape/api/ApiServices;
+         3: areturn
+
+  private gg.vape.api.ApiResponse requestAccountInfo(java.lang.String);
+    Code:
+         0: new           #72                 // class java/lang/StringBuilder
+         3: dup
+         4: invokespecial #76                 // Method java/lang/StringBuilder."<init>":()V
+         7: astore_2
+         8: aload_0
+         9: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        12: pop
+        13: aload_2
+        14: aload_0
+        15: getfield      #82                 // Field baseUrl:Ljava/lang/String;
+        18: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        21: ldc           #88                 // String /api/v1/
+        23: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        26: aload_1
+        27: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        30: ldc           #121                // String /authenticated
+        32: invokevirtual #86                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        35: invokevirtual #93                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        38: invokedynamic #135,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+        43: invokestatic  #139                // Method gg/vape/api/ApiHttpClient.getApiResponse:(Ljava/lang/String;Ljava/util/function/Function;)Lgg/vape/api/ApiResponse;
+        46: areturn
+        47: astore_2
+        48: new           #104                // class java/lang/RuntimeException
+        51: dup
+        52: aload_2
+        53: invokespecial #107                // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+        56: athrow
+      Exception table:
+         from    to  target type
+             0    46    47   Class java/lang/Exception
+
+  public gg.vape.api.SettingsApi getSettingsApi();
+    Code:
+         0: aload_0
+         1: getfield      #143                // Field settingsApi:Lgg/vape/api/SettingsApi;
+         4: areturn
+
+  public java.util.concurrent.CompletableFuture<gg.vape.api.ApiResponse<java.lang.Boolean>> registerOnlineAccount(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #151,  0            // InvokeDynamic #2:get:(Lgg/vape/api/ApiServices;Ljava/lang/String;)Ljava/util/function/Supplier;
+         7: invokestatic  #62                 // Method java/util/concurrent/CompletableFuture.supplyAsync:(Ljava/util/function/Supplier;)Ljava/util/concurrent/CompletableFuture;
+        10: areturn
+
+  public gg.vape.api.ApiServices();
+    Code:
+         0: aload_0
+         1: invokespecial #152                // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokestatic  #155                // Method resolveBaseUrl:()Ljava/lang/String;
+         8: putfield      #82                 // Field baseUrl:Ljava/lang/String;
+        11: aload_0
+        12: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        15: pop
+        16: aload_0
+        17: new           #157                // class gg/vape/api/PublicProfileApi
+        20: dup
+        21: aload_0
+        22: getfield      #82                 // Field baseUrl:Ljava/lang/String;
+        25: invokespecial #160                // Method gg/vape/api/PublicProfileApi."<init>":(Ljava/lang/String;)V
+        28: putfield      #26                 // Field publicProfileApi:Lgg/vape/api/PublicProfileApi;
+        31: aload_0
+        32: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        35: pop
+        36: aload_0
+        37: new           #162                // class gg/vape/api/SettingsApi
+        40: dup
+        41: aload_0
+        42: getfield      #82                 // Field baseUrl:Ljava/lang/String;
+        45: invokespecial #163                // Method gg/vape/api/SettingsApi."<init>":(Ljava/lang/String;)V
+        48: putfield      #143                // Field settingsApi:Lgg/vape/api/SettingsApi;
+        51: aload_0
+        52: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        55: pop
+        56: aload_0
+        57: new           #165                // class gg/vape/api/UserDataApi
+        60: dup
+        61: aload_0
+        62: getfield      #82                 // Field baseUrl:Ljava/lang/String;
+        65: invokespecial #166                // Method gg/vape/api/UserDataApi."<init>":(Ljava/lang/String;)V
+        68: putfield      #168                // Field userDataApi:Lgg/vape/api/UserDataApi;
+        71: return
+
+  private static java.lang.String resolveBaseUrl();
+    Code:
+         0: ldc           #170                // String VAPE_ONLINE_BASE_URL
+         2: invokestatic  #176                // Method java/lang/System.getenv:(Ljava/lang/String;)Ljava/lang/String;
+         5: astore_0
+         6: aload_0
+         7: ifnull        20
+        10: aload_0
+        11: invokevirtual #179                // Method java/lang/String.trim:()Ljava/lang/String;
+        14: invokevirtual #183                // Method java/lang/String.isEmpty:()Z
+        17: ifeq          25
+        20: ldc           #185                // String https://online.vape.chat
+        22: goto          33
+        25: aload_0
+        26: ldc           #187                // String /+$
+        28: ldc           #189                // String
+        30: invokevirtual #193                // Method java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        33: astore_1
+        34: aload_1
+        35: areturn
+
+  public static void setLegacyComponentState(gg.vape.ui.click.component.GuiComponent[]);
+    Code:
+         0: aload_0
+         1: putstatic     #67                 // Field legacyComponentState:[Lgg/vape/ui/click/component/GuiComponent;
+         4: return
+
+  public gg.vape.api.UserDataApi getUserDataApi();
+    Code:
+         0: aload_0
+         1: getfield      #168                // Field userDataApi:Lgg/vape/api/UserDataApi;
+         4: areturn
+
+  private gg.vape.api.ApiResponse lambda$registerOnlineAccount$1(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #201                // Method requestRegistration:(Ljava/lang/String;)Lgg/vape/api/ApiResponse;
+         5: areturn
+
+  private gg.vape.api.ApiResponse lambda$getAccountInfo$0(java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokespecial #203                // Method requestAccountInfo:(Ljava/lang/String;)Lgg/vape/api/ApiResponse;
+         5: areturn
+
+  static {};
+    Code:
+         0: iconst_4
+         1: anewarray     #206                // class gg/vape/ui/click/component/GuiComponent
+         4: invokestatic  #208                // Method setLegacyComponentState:([Lgg/vape/ui/click/component/GuiComponent;)V
+         7: new           #2                  // class gg/vape/api/ApiServices
+        10: dup
+        11: invokespecial #209                // Method "<init>":()V
+        14: putstatic     #118                // Field instance:Lgg/vape/api/ApiServices;
+        17: return
+}
